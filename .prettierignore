@@ -1,0 +1,7 @@
+# Generated or vendored files that must not be reformatted.
+node_modules
+dist
+data
+public/uploads
+package-lock.json
+src/routeTree.gen.ts
