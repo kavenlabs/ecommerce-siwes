@@ -11,7 +11,7 @@ import { naira } from "~/lib/utils";
 
 import { StatusBadge } from "./orders";
 
-export const Route = createFileRoute("/orders/$id")({
+export const Route = createFileRoute("/orders_/$id")({
   beforeLoad: async () => {
     const res = await fetchRequireUserFn();
     if ("error" in res) throw redirect({ to: "/login" });
