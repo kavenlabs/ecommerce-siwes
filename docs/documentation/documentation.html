@@ -1,0 +1,1263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adetunji Electronics Documentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<style>
+:root {
+  --ink: #1b1d1a;
+  --muted: #5d625a;
+  --rule: #d8d5cb;
+  --paper: #ffffff;
+  --tint: #f5f3ec;
+  --accent: #0a7a3b;
+  --accent-tint: #e5f1e8;
+  --warn: #a6382b;
+  --warn-tint: #f8e6e2;
+  --code-bg: #f6f5f0;
+  --serif: "Source Serif 4", Georgia, serif;
+  --sans: "IBM Plex Sans Condensed", "Arial Narrow", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { /* print document: stays on paper colours */ }
+}
+:root[data-theme="dark"] { /* intentionally identical: this page is a print layout */ }
+
+/* ---------- page model (Paged.js) ---------- */
+@page {
+  size: A4;
+  margin: 22mm 20mm 22mm 24mm;
+  @top-left { content: "Adetunji Electronics · Documentation"; font: 500 7.5pt var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  @top-right { content: string(part); font: 500 7.5pt var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  @bottom-right { content: counter(page); font: 600 9pt var(--sans); color: var(--ink); }
+}
+@page cover { margin: 0; @top-left { content: none } @top-right { content: none } @bottom-right { content: none } }
+@page front { @top-right { content: none } @bottom-right { content: counter(page, lower-roman); } }
+
+html { background: var(--paper); }
+body {
+  margin: 0; color: var(--ink); background: var(--paper);
+  font: 10pt/1.52 var(--serif);
+  font-optical-sizing: auto;
+  hyphens: auto; -webkit-hyphens: auto;
+  text-rendering: optimizeLegibility;
+}
+/* screen preview without Paged.js */
+@media screen { body:not(.pagedjs) main { max-width: 720px; margin: 0 auto; padding: 24px 16px 80px; } }
+
+h1, h2, h3, h4, .label, figcaption, th, .toc, .kicker { font-family: var(--sans); }
+h1.part-title { string-set: part content(text); }
+h2 { font-size: 15pt; font-weight: 600; margin: 22pt 0 6pt; line-height: 1.2; break-after: avoid; }
+h2 .num, h3 .num { color: var(--accent); margin-right: 8pt; font-weight: 700; }
+h3 { font-size: 11.5pt; font-weight: 600; margin: 14pt 0 4pt; break-after: avoid; }
+h4 { font-size: 9.5pt; font-weight: 600; margin: 10pt 0 2pt; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); break-after: avoid; }
+p { margin: 0 0 7pt; orphans: 3; widows: 3; }
+a { color: inherit; text-decoration: none; }
+strong { font-weight: 600; }
+ul, ol { margin: 0 0 8pt; padding-left: 15pt; }
+li { margin-bottom: 2.5pt; }
+code { font: 8.3pt var(--mono); background: var(--code-bg); padding: 0 1pt; border-radius: 2pt; hyphens: none; }
+.muted { color: var(--muted); }
+
+/* ---------- cover ---------- */
+.cover { page: cover; height: 297mm; position: relative; background: var(--tint); overflow: hidden; break-after: page; }
+.cover .band { position: absolute; left: 0; top: 0; bottom: 0; width: 18mm; background: var(--accent); }
+.cover .inner { position: absolute; left: 34mm; right: 22mm; top: 40mm; }
+.cover .kicker { font-size: 9pt; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.cover h1 { font: 600 34pt/1.05 var(--sans); margin: 10pt 0 8pt; letter-spacing: -.01em; }
+.cover .sub { font: 400 14pt/1.35 var(--serif); color: var(--muted); max-width: 120mm; }
+.cover .parts { margin-top: 26mm; border-top: 1.2pt solid var(--ink); }
+.cover .parts div { display: flex; gap: 10mm; padding: 6pt 0; border-bottom: .6pt solid var(--rule); font: 500 10.5pt var(--sans); }
+.cover .parts span:first-child { width: 18mm; color: var(--accent); font-weight: 700; }
+.cover .meta { position: absolute; left: 34mm; right: 22mm; bottom: 26mm; display: grid; grid-template-columns: 1fr 1fr; gap: 6pt 12mm; font: 9pt/1.4 var(--sans); }
+.cover .meta b { display: block; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; font-size: 7.5pt; color: var(--muted); }
+
+/* ---------- front matter ---------- */
+.front { page: front; }
+.toc-page { break-after: page; }
+.toc-page h2 { margin-top: 0; }
+.toc { list-style: none; padding: 0; margin: 0; font-size: 10pt; }
+.toc li { margin: 0; }
+.toc .tp { margin-top: 12pt; padding: 5pt 0 3pt; border-bottom: 1.2pt solid var(--ink); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: 9pt; }
+.toc .tp:first-child { margin-top: 0; }
+.toc a { display: flex; align-items: baseline; padding: 3.2pt 0; border-bottom: .5pt dotted var(--rule); }
+.toc a .n { width: 12mm; color: var(--accent); font-weight: 600; }
+.toc a .t { flex: 1; }
+.toc a::after { content: target-counter(attr(href), page); font-weight: 600; font-variant-numeric: tabular-nums; }
+.abstract { break-after: page; }
+.abstract .lede { font-size: 11.5pt; line-height: 1.5; }
+
+/* ---------- parts ---------- */
+.part-opener { break-before: page; padding-top: 40mm; break-after: page; }
+.part-opener .kicker { font-size: 9pt; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.part-opener h1 { font: 600 30pt/1.05 var(--sans); margin: 8pt 0 14pt; }
+.part-opener p { font-size: 11.5pt; max-width: 130mm; color: var(--muted); }
+.part-opener ol { margin-top: 18mm; list-style: none; padding: 0; border-top: 1.2pt solid var(--ink); font: 500 10pt var(--sans); }
+.part-opener ol li { padding: 5pt 0; border-bottom: .5pt solid var(--rule); margin: 0; }
+.part-opener ol li span { display: inline-block; width: 14mm; color: var(--accent); font-weight: 700; }
+section.chapter { break-before: page; }
+section.chapter.flow { break-before: auto; }
+
+/* ---------- tables ---------- */
+table { width: 100%; border-collapse: collapse; margin: 6pt 0 10pt; font-size: 8.8pt; line-height: 1.4; break-inside: auto; }
+thead { display: table-header-group; }
+tr { break-inside: avoid; }
+th { text-align: left; font-weight: 600; font-size: 7.8pt; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); border-bottom: 1.2pt solid var(--ink); padding: 4pt 6pt 3pt 0; vertical-align: bottom; }
+td { border-bottom: .5pt solid var(--rule); padding: 4pt 6pt 4pt 0; vertical-align: top; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+td code { font-size: 7.8pt; }
+.req td:first-child { font: 600 8.5pt var(--sans); color: var(--accent); white-space: nowrap; width: 11mm; }
+
+/* ---------- figures ---------- */
+figure { margin: 10pt 0 14pt; break-inside: avoid; }
+figure svg { display: block; width: 100%; height: auto; }
+figcaption { font-size: 8.5pt; line-height: 1.4; color: var(--muted); margin-top: 5pt; padding-top: 4pt; border-top: .5pt solid var(--rule); }
+figcaption b { color: var(--ink); font-weight: 600; margin-right: 4pt; }
+.shot img { display: block; width: 100%; border: .6pt solid var(--rule); }
+.shot.narrow img { width: 58%; margin: 0 auto; }
+.shot.phone img { width: 46%; margin: 0 auto; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+.pair figure { margin-top: 0; }
+
+/* ---------- callouts ---------- */
+.note { border-left: 2.5pt solid var(--accent); background: var(--accent-tint); padding: 6pt 9pt; margin: 8pt 0 10pt; font-size: 9.2pt; break-inside: avoid; }
+.note.warn { border-color: var(--warn); background: var(--warn-tint); }
+.note .label { display: block; font-size: 7.5pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 2pt; color: var(--accent); }
+.note.warn .label { color: var(--warn); }
+.note p:last-child { margin-bottom: 0; }
+
+/* ---------- code ---------- */
+pre { font: 7.6pt/1.45 var(--mono); background: var(--code-bg); border-top: 1pt solid var(--ink); border-bottom: .5pt solid var(--rule); padding: 7pt 9pt; margin: 6pt 0 4pt; white-space: pre-wrap; word-break: break-word; hyphens: none; }
+pre code { background: none; padding: 0; font: inherit; }
+.src { font: 500 7.5pt var(--sans); letter-spacing: .04em; color: var(--muted); margin: 8pt 0 0; text-transform: uppercase; }
+.hljs-comment { color: #7a7e74; font-style: italic; }
+.hljs-keyword, .hljs-built_in { color: #0a5f30; font-weight: 500; }
+.hljs-string { color: #8a4b12; }
+.hljs-number, .hljs-literal { color: #7b2f8f; }
+.hljs-title, .hljs-title.function_ { color: #1b1d1a; font-weight: 500; }
+.hljs-type, .hljs-attr { color: #2c5a85; }
+
+.cols-2 { column-count: 2; column-gap: 8mm; }
+.cols-2 > * { break-inside: avoid; }
+dl.kv { display: grid; grid-template-columns: 34mm 1fr; gap: 3pt 6mm; margin: 6pt 0 10pt; font-size: 9.2pt; }
+dl.kv dt { font: 600 8.5pt var(--sans); color: var(--muted); }
+dl.kv dd { margin: 0; }
+
+/* svg text */
+svg text { font-family: var(--sans); fill: var(--ink); }
+svg .small { font-size: 9.5px; }
+svg .tiny { font-size: 8.5px; fill: var(--muted); }
+svg .mono { font-family: var(--mono); font-size: 8.6px; }
+svg .bold { font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- ======================= COVER ======================= -->
+<div class="cover">
+  <div class="band"></div>
+  <div class="inner">
+    <div class="kicker">Software Documentation</div>
+    <h1>Adetunji Electronics<br>Online Store</h1>
+    <p class="sub">The software and the database behind a single-shop ecommerce site for cables, chargers and phone accessories, paid for by bank transfer and confirmed by hand.</p>
+    <div class="parts">
+      <div><span>Part A</span><span>Software Development</span></div>
+      <div><span>Part B</span><span>Database Management</span></div>
+      <div><span>App.</span><span>Screens, source listings, verification log</span></div>
+    </div>
+  </div>
+  <div class="meta">
+    <div><b>Repository</b>kavenlabs/ecommerce-siwes</div>
+    <div><b>Baseline commit</b>e14eaa0 · "scaffold initial ecommerce storefront app"</div>
+    <div><b>Stack</b>TypeScript · React 19 · TanStack Start · node:sqlite</div>
+    <div><b>Date</b>October 2026</div>
+  </div>
+</div>
+
+<main>
+
+<!-- ======================= FRONT MATTER ======================= -->
+<div class="front">
+<section class="toc-page">
+  <h2>Contents</h2>
+  <ul class="toc">
+    <li class="tp">Front matter</li>
+    <li><a href="#summary"><span class="n">—</span><span class="t">Summary and how this documentation was produced</span></a></li>
+    <li class="tp">Part A · Software Development</li>
+    <li><a href="#a1"><span class="n">A.1</span><span class="t">Introduction: the problem</span></a></li>
+    <li><a href="#a2"><span class="n">A.2</span><span class="t">Requirement analysis</span></a></li>
+    <li><a href="#a3"><span class="n">A.3</span><span class="t">System design</span></a></li>
+    <li><a href="#a4"><span class="n">A.4</span><span class="t">Implementation</span></a></li>
+    <li><a href="#a5"><span class="n">A.5</span><span class="t">Testing</span></a></li>
+    <li><a href="#a6"><span class="n">A.6</span><span class="t">Deployment</span></a></li>
+    <li><a href="#a7"><span class="n">A.7</span><span class="t">Screenshots</span></a></li>
+    <li><a href="#a8"><span class="n">A.8</span><span class="t">Source code listing</span></a></li>
+    <li class="tp">Part B · Database Management</li>
+    <li><a href="#b1"><span class="n">B.1</span><span class="t">The DBMS and why it fits</span></a></li>
+    <li><a href="#b2"><span class="n">B.2</span><span class="t">Database design and ER diagram</span></a></li>
+    <li><a href="#b3"><span class="n">B.3</span><span class="t">Normalization</span></a></li>
+    <li><a href="#b4"><span class="n">B.4</span><span class="t">Queries written</span></a></li>
+    <li><a href="#b5"><span class="n">B.5</span><span class="t">Forms and reports</span></a></li>
+    <li><a href="#b6"><span class="n">B.6</span><span class="t">Automating the shop's record-keeping</span></a></li>
+    <li class="tp">Closing</li>
+    <li><a href="#limits"><span class="n">—</span><span class="t">Known limitations and recommendations</span></a></li>
+  </ul>
+</section>
+
+<section class="abstract" id="summary">
+  <h2>Summary</h2>
+  <p class="lede">Adetunji Electronics is a small shop selling chargers, cables, power banks and similar accessories. This project gives it an online storefront: customers browse stock, build a cart, and place an order for delivery or collection. The owner works through a single admin page, adding and pricing products, keeping stock counts and moving each order from <em>pending</em> to <em>confirmed</em> to <em>delivered</em>.</p>
+  <p>Card payments are deliberately left out. The customer pays by bank transfer after the owner calls to confirm the order, which matches how many small Nigerian retailers already take payment. The software's job is to replace the paper or WhatsApp record of who ordered what: a durable, consistent record of every order, its price at the time of sale, and what that sale did to stock.</p>
+  <p>The whole system is one Node.js process and one SQLite file. It has no external database server, cloud services or payment gateway. That makes it cheap to run on one small VPS or a machine in the shop, and backing it up means copying one file.</p>
+
+  <h3>How this documentation was produced</h3>
+  <p>Every claim here was checked against the code in the repository at commit <code>e14eaa0</code>. The application was installed with <code>npm ci</code>, seeded with <code>npm run db:seed</code> and run with <code>npm run dev</code>. It was then driven in headless Chromium with Playwright. The schema, queries and code listings are quoted from the source files named next to them.</p>
+  <div class="note">
+    <span class="label">About the sample data</span>
+    <p>The seed script creates six products and one admin account (<code>admin@adetunji.shop</code>, "Shop Owner"). It creates no customers and no orders. To have real records to document, two customer accounts (Chidinma Okafor and Tunde Bakare, both at <code>example.com</code>) were registered and three orders placed <strong>through the live user interface</strong> while the screenshots were taken. The owner then confirmed one and marked another delivered. Every order, total and stock figure in this documentation comes from those rows in <code>data/store.db</code>.</p>
+  </div>
+  <div class="note warn">
+    <span class="label">Defect found and fixed during documentation</span>
+    <p>The order detail page (<code>/orders/:id</code>) never displayed. The file <code>src/routes/orders.$id.tsx</code> made it a child of the <code>/orders</code> route, which has no <code>&lt;Outlet /&gt;</code>, so the order list rendered in its place. That included the page a customer is sent to right after checkout. Renaming the file to <code>orders_.$id.tsx</code> (TanStack Router's suffix for "same URL, not nested") fixes it, and the public URL is unchanged. See §A.5.</p>
+  </div>
+</section>
+</div>
+
+<!-- ======================= PART A ======================= -->
+<div class="part-opener">
+  <div class="kicker">Part A</div>
+  <h1 class="part-title">Software Development</h1>
+  <p>What the software is for, what it has to do, how it is built, and how far it has been tested and deployed.</p>
+  <ol>
+    <li><span>A.1</span>Introduction</li>
+    <li><span>A.2</span>Requirement analysis</li>
+    <li><span>A.3</span>System design</li>
+    <li><span>A.4</span>Implementation</li>
+    <li><span>A.5</span>Testing</li>
+    <li><span>A.6</span>Deployment</li>
+    <li><span>A.7</span>Screenshots</li>
+    <li><span>A.8</span>Source code listing</li>
+  </ol>
+</div>
+
+<section class="chapter flow" id="a1">
+  <h2><span class="num">A.1</span>Introduction: the problem</h2>
+  <p>A small accessories shop usually runs on stock it can see and orders it keeps in its head, a notebook or a WhatsApp chat. That holds up when a handful of customers walk in. It breaks down once orders arrive from people who are not in the shop: it is easy to promise the last 65W charger to two people, to quote yesterday's price, or to lose track of who has paid.</p>
+  <p>The store described here closes that gap for one shop, Adetunji Electronics, with as little machinery as possible:</p>
+  <ul>
+    <li><strong>A public catalogue with live stock.</strong> Every product card shows the count on the shelf (for example "<em>5 in stock</em>" for the 65W GaN dual port after one sale). The add-to-cart control will not go above that number.</li>
+    <li><strong>Orders that cannot oversell.</strong> Stock is checked and reduced inside one database transaction at the moment the order is placed (§A.3.3).</li>
+    <li><strong>Payment matched to local practice.</strong> Checkout asks for a phone number, not a card. Orders start as <em>pending</em> ("Awaiting payment" to the customer). The order page tells the customer, "You will get a call on 0803 412 7781 with transfer details once it is confirmed." The owner confirms the transfer by hand and moves the order on.</li>
+    <li><strong>Delivery or collection.</strong> The customer chooses delivery to an address (a flat ₦2,000 fee, <code>DELIVERY_FEE</code> in <code>src/lib/orders-data.ts:6</code>) or free collection from the shop.</li>
+    <li><strong>A record that does not drift.</strong> Each order line copies the product name and price at the moment of sale, so a later price change never rewrites history (§B.3).</li>
+  </ul>
+  <p>The README lists what is out of scope on purpose: card payments, search, coupons, reviews, multiple shops and courier integration. This documentation treats those as deliberate scope limits, not missing features.</p>
+</section>
+
+<section class="chapter" id="a2">
+  <h2><span class="num">A.2</span>Requirement analysis</h2>
+
+  <h3>A.2.1 Stakeholders</h3>
+  <table>
+    <thead><tr><th style="width:24%">Stakeholder</th><th style="width:36%">Interest</th><th>How the system represents them</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Shop owner</strong> (admin)</td><td>Keep the catalogue, prices and stock right. See every order and record each payment and hand-over.</td><td>A <code>users</code> row with <code>is_admin = 1</code>. Seeded as "Shop Owner", <code>admin@adetunji.shop</code>. On an empty database the first account to register becomes admin (<code>auth-api.ts:55-57</code>).</td></tr>
+      <tr><td><strong>Customer</strong></td><td>See what is in stock and what it costs, order without a card, and follow the order.</td><td>A self-registered <code>users</code> row with <code>is_admin = 0</code>. Can read only their own orders (<code>store-actions.ts:31-32</code>).</td></tr>
+      <tr><td><strong>Visitor</strong></td><td>Browse before committing.</td><td>No account. The home page, shop, product pages and cart all work signed out. Checkout redirects to <code>/login</code>.</td></tr>
+      <tr><td><strong>Operator / maintainer</strong></td><td>Run, update and back up the shop on one machine.</td><td>npm scripts for seeding, password reset, build and serve. All state lives in <code>data/store.db</code> and <code>public/uploads</code>.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>A.2.2 Functional requirements</h3>
+  <table class="req">
+    <thead><tr><th>ID</th><th style="width:48%">Requirement</th><th>Where it is met</th></tr></thead>
+    <tbody>
+      <tr><td>F1</td><td>List all products with price and stock; show one product in detail.</td><td><code>fetchShopProductsFn</code>, <code>fetchProductFn</code> · <code>routes/shop.tsx</code>, <code>routes/products.$id.tsx</code></td></tr>
+      <tr><td>F2</td><td>Keep a cart across page loads without an account.</td><td><code>lib/cart.tsx</code>, stored in <code>localStorage["store_cart"]</code></td></tr>
+      <tr><td>F3</td><td>Register, sign in and sign out with email and password.</td><td><code>registerFn</code>, <code>loginFn</code>, <code>logoutFn</code> in <code>auth-api.ts</code></td></tr>
+      <tr><td>F4</td><td>Place an order for delivery (address required) or collection, with a phone number.</td><td><code>placeOrderFn</code> → <code>createOrder</code></td></tr>
+      <tr><td>F5</td><td>Refuse an order that exceeds stock and reduce stock when an order succeeds.</td><td><code>createOrder</code> transaction (<code>orders-data.ts:23-114</code>)</td></tr>
+      <tr><td>F6</td><td>Show a customer their own order history and order detail.</td><td><code>fetchUserOrdersFn</code>, <code>fetchOrderDetailFn</code></td></tr>
+      <tr><td>F7</td><td>Admin: add, edit and delete products, including an optional image.</td><td><code>saveProductFn</code>, <code>deleteProductFn</code> in <code>admin-api.ts</code></td></tr>
+      <tr><td>F8</td><td>Admin: see all orders and set each one's status.</td><td><code>fetchAdminDataFn</code>, <code>updateOrderStatusFn</code></td></tr>
+      <tr><td>F9</td><td>Operator: reset a password from the command line, which also signs that user out everywhere.</td><td><code>scripts/set-password.ts</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>A.2.3 Non-functional requirements</h3>
+  <table class="req">
+    <thead><tr><th>ID</th><th style="width:30%">Quality</th><th>How the code achieves it</th></tr></thead>
+    <tbody>
+      <tr><td>N1</td><td>Price integrity</td><td>The browser sends only <code>productId</code> and <code>qty</code>. Names, prices and totals are read back from the database on the server (<code>checkout-api.ts:7-14</code>).</td></tr>
+      <tr><td>N2</td><td>Stock integrity</td><td>Duplicate lines are merged before validation. The decrement runs inside <code>BEGIN…COMMIT</code> and carries <code>AND stock &gt;= ?</code>, so stock cannot go negative.</td></tr>
+      <tr><td>N3</td><td>Money accuracy</td><td>Whole naira stored as <code>INTEGER</code>, never floating point. <code>naira()</code> in <code>lib/utils.ts</code> is the only place a price is formatted.</td></tr>
+      <tr><td>N4</td><td>Authentication security</td><td>Passwords hashed with scrypt and a per-user 16-byte salt, compared with <code>timingSafeEqual</code>. Sessions use 32-byte random tokens in an <code>httpOnly</code>, <code>sameSite=lax</code> cookie that lasts 30 days. Login gives the same error for an unknown email and a wrong password.</td></tr>
+      <tr><td>N5</td><td>Authorization</td><td>Admin rights are checked on the server inside every admin function (<code>requireAdmin</code>), not just by hiding UI. Order reads check ownership.</td></tr>
+      <tr><td>N6</td><td>Upload safety</td><td>Images under 4 MB. The format is decided by the file's leading bytes (JPG, PNG, WebP or AVIF), and the extension comes from that allowlist, never from the uploaded file name.</td></tr>
+      <tr><td>N7</td><td>Responsiveness</td><td>Data routes avoid blocking loaders and use React Query with prefetch-on-hover. The README reports 62–105 ms to content at 250 ms simulated latency. That figure is the authors' measurement and was not re-measured for this documentation.</td></tr>
+      <tr><td>N8</td><td>Deployability</td><td>Runs on Node ≥ 22.5 with no external services. A single file holds all state, so a backup is a file copy.</td></tr>
+      <tr><td>N9</td><td>Maintainability</td><td>Strict TypeScript. <code>npm run verify</code> runs typecheck, oxlint, the oxfmt check and the build. A layered file-naming convention keeps database code out of the client bundle.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="chapter" id="a3">
+  <h2><span class="num">A.3</span>System design</h2>
+
+  <h3>A.3.1 Architecture tiers</h3>
+  <p>The application is a classic three-tier system packed into one process. TanStack Start renders pages on the server and then hydrates them in the browser. Every database call crosses an RPC boundary created with <code>createServerFn</code>, so the browser bundle contains only a stub. That boundary is enforced by naming convention: <code>*-data.ts</code> files contain SQL and are imported only by <code>*-api.ts</code> and <code>*-actions.ts</code> files. The connection itself is wrapped in <code>createServerOnlyFn</code>, which throws if it is ever reached from client code.</p>
+
+  <figure>
+  <svg viewBox="0 0 680 470" role="img" aria-label="Three-tier architecture diagram">
+    <defs>
+      <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1b1d1a"/></marker>
+      <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a7a3b"/></marker>
+    </defs>
+    <!-- bands -->
+    <rect x="0" y="4" width="680" height="118" fill="#f5f3ec"/>
+    <rect x="0" y="146" width="680" height="190" fill="#ffffff" stroke="#d8d5cb"/>
+    <rect x="0" y="360" width="680" height="106" fill="#f5f3ec"/>
+    <text x="10" y="20" class="small bold">TIER 1 · PRESENTATION — browser</text>
+    <text x="10" y="162" class="small bold">TIER 2 · APPLICATION — one Node.js process</text>
+    <text x="10" y="376" class="small bold">TIER 3 · DATA — local disk</text>
+
+    <!-- tier 1 -->
+    <rect x="20" y="32" width="200" height="74" rx="3" fill="#fff" stroke="#1b1d1a"/>
+    <text x="30" y="50" class="small bold">React 19 pages</text>
+    <text x="30" y="64" class="tiny">src/routes/*.tsx · TanStack Router</text>
+    <text x="30" y="78" class="tiny">preload on hover ("intent")</text>
+    <text x="30" y="92" class="tiny">skeletons while data loads</text>
+    <rect x="240" y="32" width="200" height="74" rx="3" fill="#fff" stroke="#1b1d1a"/>
+    <text x="250" y="50" class="small bold">React Query cache</text>
+    <text x="250" y="64" class="tiny">lib/queries.ts query keys</text>
+    <text x="250" y="78" class="tiny">one client per tab (getQueryClient)</text>
+    <text x="250" y="92" class="tiny">purged on sign-in / sign-out</text>
+    <rect x="460" y="32" width="200" height="74" rx="3" fill="#fff" stroke="#1b1d1a"/>
+    <text x="470" y="50" class="small bold">Cart context</text>
+    <text x="470" y="64" class="tiny">lib/cart.tsx</text>
+    <text x="470" y="78" class="tiny">localStorage "store_cart"</text>
+    <text x="470" y="92" class="tiny">never trusted for price</text>
+
+    <!-- link tier1-tier2 -->
+    <line x1="340" y1="108" x2="340" y2="176" stroke="#0a7a3b" stroke-width="1.6" marker-end="url(#arg)" marker-start="url(#arg)"/>
+    <rect x="352" y="124" width="300" height="18" fill="#fff"/>
+    <text x="356" y="137" class="tiny" style="fill:#0a7a3b">HTTP(S) · SSR HTML + RPC calls · cookie store_session (httpOnly)</text>
+
+    <!-- tier 2 -->
+    <rect x="160" y="178" width="360" height="34" rx="3" fill="#e5f1e8" stroke="#0a7a3b"/>
+    <text x="172" y="193" class="small bold">scripts/serve.mjs</text>
+    <text x="172" y="206" class="tiny">node:http · serves dist/client assets and /uploads · buffers POST bodies</text>
+    <line x1="340" y1="212" x2="340" y2="226" stroke="#1b1d1a" marker-end="url(#ar)"/>
+    <rect x="160" y="228" width="360" height="30" rx="3" fill="#fff" stroke="#1b1d1a"/>
+    <text x="172" y="247" class="small"><tspan class="bold">TanStack Start handler</tspan> — dist/server/server.js (SSR + server functions)</text>
+    <line x1="250" y1="258" x2="250" y2="274" stroke="#1b1d1a" marker-end="url(#ar)"/>
+    <rect x="20" y="276" width="330" height="50" rx="3" fill="#fff" stroke="#1b1d1a"/>
+    <text x="30" y="292" class="small bold">createServerFn · *-api.ts, *-actions.ts</text>
+    <text x="30" y="305" class="tiny">validate input (zod / guards) · currentUser() from cookie</text>
+    <text x="30" y="318" class="tiny">requireAdmin() · ownership checks · return {ok} | {error}</text>
+    <line x1="350" y1="301" x2="398" y2="301" stroke="#1b1d1a" marker-end="url(#ar)"/>
+    <rect x="400" y="276" width="260" height="50" rx="3" fill="#fff" stroke="#1b1d1a"/>
+    <text x="410" y="292" class="small bold">*-data.ts</text>
+    <text x="410" y="305" class="tiny">plain SQL via one / all / run helpers</text>
+    <text x="410" y="318" class="tiny">products · orders · auth (sessions, users)</text>
+
+    <!-- tier2 to tier3 -->
+    <line x1="530" y1="326" x2="530" y2="388" stroke="#1b1d1a" marker-end="url(#ar)"/>
+    <path d="M520,195 H640 V388" fill="none" stroke="#1b1d1a" stroke-dasharray="3 3" marker-end="url(#ar)"/>
+    <text x="604" y="250" class="tiny">GET /uploads/*</text>
+
+    <!-- tier 3 -->
+    <rect x="20" y="390" width="290" height="62" rx="3" fill="#fff" stroke="#1b1d1a"/>
+    <text x="30" y="407" class="small bold">admin-api.ts saveImage()</text>
+    <text x="30" y="421" class="tiny">magic-byte check → public/uploads/</text>
+    <text x="30" y="435" class="tiny">&lt;timestamp&gt;-&lt;rand&gt;.jpg|png|webp|avif</text>
+    <rect x="400" y="390" width="200" height="62" rx="3" fill="#e5f1e8" stroke="#0a7a3b"/>
+    <text x="410" y="407" class="small bold">node:sqlite DatabaseSync</text>
+    <text x="410" y="421" class="tiny">PRAGMA journal_mode = WAL</text>
+    <text x="410" y="435" class="tiny">PRAGMA foreign_keys = ON</text>
+    <text x="410" y="447" class="mono">data/store.db</text>
+    <rect x="612" y="390" width="58" height="62" rx="3" fill="#fff" stroke="#1b1d1a"/>
+    <text x="619" y="414" class="tiny">public/</text>
+    <text x="619" y="426" class="tiny">uploads/</text>
+    <path d="M310,440 H380 V460 H641 V454" fill="none" stroke="#1b1d1a" marker-end="url(#ar)"/>
+  </svg>
+  <figcaption><b>Figure A1.</b>Runtime tiers. Green boxes are the two pieces specific to this deployment shape: the hand-written HTTP server and the embedded SQLite engine. Uploaded images skip the build output and are served straight from <code>public/uploads</code>, so a new upload is live without a rebuild.</figcaption>
+  </figure>
+
+  <h3>A.3.2 Use cases</h3>
+  <p>Three actors use the system. A <em>Customer</em> is a Visitor who has registered, so they inherit everything a Visitor can do. The <em>Shop owner</em> uses the same login form and differs only in the <code>is_admin</code> flag, which the server checks on every admin action.</p>
+  <figure>
+  <svg viewBox="0 0 680 450" role="img" aria-label="Use-case diagram">
+    <defs>
+      <marker id="tri" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#fff" stroke="#1b1d1a"/></marker>
+      <marker id="op" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10" fill="none" stroke="#1b1d1a"/></marker>
+    </defs>
+    <rect x="150" y="8" width="380" height="434" rx="6" fill="#f5f3ec" stroke="#1b1d1a"/>
+    <text x="340" y="26" text-anchor="middle" class="small bold">Adetunji Electronics store</text>
+
+    <!-- actors -->
+    <g stroke="#1b1d1a" fill="none" stroke-width="1.3">
+      <circle cx="60" cy="70" r="9"/><line x1="60" y1="79" x2="60" y2="105"/><line x1="44" y1="88" x2="76" y2="88"/><line x1="60" y1="105" x2="48" y2="124"/><line x1="60" y1="105" x2="72" y2="124"/>
+      <circle cx="60" cy="230" r="9"/><line x1="60" y1="239" x2="60" y2="265"/><line x1="44" y1="248" x2="76" y2="248"/><line x1="60" y1="265" x2="48" y2="284"/><line x1="60" y1="265" x2="72" y2="284"/>
+      <circle cx="620" cy="250" r="9"/><line x1="620" y1="259" x2="620" y2="285"/><line x1="604" y1="268" x2="636" y2="268"/><line x1="620" y1="285" x2="608" y2="304"/><line x1="620" y1="285" x2="632" y2="304"/>
+    </g>
+    <text x="60" y="140" text-anchor="middle" class="small bold">Visitor</text>
+    <text x="60" y="300" text-anchor="middle" class="small bold">Customer</text>
+    <text x="60" y="312" text-anchor="middle" class="tiny">is_admin = 0</text>
+    <text x="620" y="320" text-anchor="middle" class="small bold">Shop owner</text>
+    <text x="620" y="332" text-anchor="middle" class="tiny">is_admin = 1</text>
+    <line x1="60" y1="216" x2="60" y2="146" stroke="#1b1d1a" marker-end="url(#tri)"/>
+
+    <!-- use cases -->
+    <g fill="#fff" stroke="#1b1d1a">
+      <ellipse cx="340" cy="56" rx="140" ry="17"/>
+      <ellipse cx="340" cy="98" rx="140" ry="17"/>
+      <ellipse cx="340" cy="140" rx="140" ry="17"/>
+      <ellipse cx="340" cy="190" rx="140" ry="17" fill="#e5f1e8" stroke="#0a7a3b"/>
+      <ellipse cx="340" cy="238" rx="120" ry="15" stroke-dasharray="3 2"/>
+      <ellipse cx="340" cy="284" rx="140" ry="17"/>
+      <ellipse cx="340" cy="334" rx="140" ry="17"/>
+      <ellipse cx="340" cy="376" rx="140" ry="17"/>
+      <ellipse cx="340" cy="418" rx="140" ry="17"/>
+    </g>
+    <text x="340" y="60" text-anchor="middle" class="small">Browse shop and product detail</text>
+    <text x="340" y="102" text-anchor="middle" class="small">Manage cart (kept in the browser)</text>
+    <text x="340" y="144" text-anchor="middle" class="small">Register / sign in / sign out</text>
+    <text x="340" y="194" text-anchor="middle" class="small bold">Place order (delivery or collection)</text>
+    <text x="340" y="242" text-anchor="middle" class="tiny">Re-price and reserve stock on server</text>
+    <text x="340" y="288" text-anchor="middle" class="small">View own order history and detail</text>
+    <text x="340" y="338" text-anchor="middle" class="small">Add / edit / delete product (+ image)</text>
+    <text x="340" y="380" text-anchor="middle" class="small">View all orders and stock levels</text>
+    <text x="340" y="422" text-anchor="middle" class="small">Set order status</text>
+    <line x1="340" y1="207" x2="340" y2="221" stroke="#1b1d1a" stroke-dasharray="3 2" marker-end="url(#op)"/>
+    <text x="348" y="217" class="tiny">«include»</text>
+
+    <!-- associations -->
+    <g stroke="#1b1d1a" stroke-width="1">
+      <line x1="80" y1="86" x2="200" y2="58"/>
+      <line x1="80" y1="92" x2="200" y2="98"/>
+      <line x1="80" y1="98" x2="204" y2="136"/>
+      <line x1="80" y1="246" x2="202" y2="194"/>
+      <line x1="80" y1="256" x2="202" y2="282"/>
+      <line x1="600" y1="262" x2="476" y2="146"/>
+      <line x1="600" y1="270" x2="478" y2="336"/>
+      <line x1="600" y1="276" x2="478" y2="376"/>
+      <line x1="600" y1="282" x2="474" y2="414"/>
+    </g>
+  </svg>
+  <figcaption><b>Figure A2.</b>Use-case diagram. The hollow triangle is generalisation: a Customer can do everything a Visitor can. "Place order" always includes server-side re-pricing and the stock check, whatever the browser sent.</figcaption>
+  </figure>
+</section>
+
+<section class="chapter" id="a3-flow">
+  <h3>A.3.3 Core workflow: placing an order</h3>
+  <p>Placing an order is the one workflow where several things can go wrong at once, and most of the code's care goes into it. The flowchart follows <code>placeOrderFn</code> (<code>checkout-api.ts:27-59</code>) and <code>createOrder</code> (<code>orders-data.ts:11-115</code>) branch by branch. Checks made before the transaction return an error straight away. Any failure after <code>BEGIN</code> throws, rolls the whole transaction back, and comes back to the form as <code>{ error }</code>. Nothing is half-written.</p>
+  <figure>
+  <svg viewBox="0 0 680 1080" style="height:176mm;width:auto;max-width:100%;margin:0 auto" role="img" aria-label="Order placement flowchart">
+    <defs>
+      <marker id="fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1b1d1a"/></marker>
+      <marker id="fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#a6382b"/></marker>
+    </defs>
+    <g stroke="#1b1d1a" stroke-width="1.2" fill="#fff">
+      <rect x="100" y="10" width="300" height="34" rx="17"/>
+      <rect x="100" y="64" width="300" height="44"/>
+      <polygon points="250,122 380,152 250,182 120,152"/>
+      <polygon points="250,200 380,230 250,260 120,230"/>
+      <polygon points="250,278 380,308 250,338 120,308"/>
+      <rect x="100" y="358" width="300" height="30" fill="#e5f1e8" stroke="#0a7a3b"/>
+      <rect x="100" y="408" width="300" height="44"/>
+      <polygon points="250,470 370,500 250,530 130,500"/>
+      <rect x="100" y="550" width="300" height="44"/>
+      <polygon points="250,612 400,648 250,684 100,648"/>
+      <rect x="100" y="704" width="300" height="44"/>
+      <rect x="100" y="768" width="300" height="30"/>
+      <rect x="100" y="818" width="300" height="58"/>
+      <polygon points="250,896 360,924 250,952 140,924"/>
+      <rect x="100" y="972" width="300" height="30" fill="#e5f1e8" stroke="#0a7a3b"/>
+      <rect x="100" y="1024" width="300" height="34" rx="17"/>
+    </g>
+    <!-- labels main column -->
+    <text x="250" y="31" text-anchor="middle" class="small bold">Customer presses "Place order" on /checkout</text>
+    <text x="250" y="82" text-anchor="middle" class="small">Browser sends only</text>
+    <text x="250" y="97" text-anchor="middle" class="mono">{ fulfilment, address, phone, items[{productId, qty}] }</text>
+    <text x="250" y="149" text-anchor="middle" class="small">checkoutSchema (zod) passes?</text>
+    <text x="250" y="162" text-anchor="middle" class="tiny">qty 1–50 · ≤100 lines · phone ≤40</text>
+    <text x="250" y="227" text-anchor="middle" class="small">currentUser() from</text>
+    <text x="250" y="240" text-anchor="middle" class="small">store_session cookie?</text>
+    <text x="250" y="305" text-anchor="middle" class="small">fulfilment = delivery</text>
+    <text x="250" y="318" text-anchor="middle" class="small">and address empty?</text>
+    <text x="250" y="378" text-anchor="middle" class="mono bold">db().exec("BEGIN")</text>
+    <text x="250" y="426" text-anchor="middle" class="small">For each line: check integer qty 1–50,</text>
+    <text x="250" y="441" text-anchor="middle" class="small">merge into Map&lt;productId, Σ qty&gt;</text>
+    <text x="250" y="497" text-anchor="middle" class="small">Every line valid?</text>
+    <text x="250" y="510" text-anchor="middle" class="tiny">(duplicates merged first)</text>
+    <text x="250" y="568" text-anchor="middle" class="small">Per merged product:</text>
+    <text x="250" y="583" text-anchor="middle" class="mono">SELECT id, name, price, stock … WHERE id = ?</text>
+    <text x="250" y="640" text-anchor="middle" class="small">Product exists, merged qty ≤ 50</text>
+    <text x="250" y="654" text-anchor="middle" class="small">and stock ≥ qty?</text>
+    <text x="250" y="722" text-anchor="middle" class="small">subtotal = Σ price × qty (database prices)</text>
+    <text x="250" y="737" text-anchor="middle" class="small">fee = ₦2,000 if delivery, else ₦0 · total = sum</text>
+    <text x="250" y="788" text-anchor="middle" class="mono">INSERT INTO orders (… 'pending' …)</text>
+    <text x="250" y="836" text-anchor="middle" class="small">Per line:</text>
+    <text x="250" y="850" text-anchor="middle" class="mono">INSERT order_items (name, price snapshot)</text>
+    <text x="250" y="864" text-anchor="middle" class="mono">UPDATE products SET stock = stock − ? WHERE id = ? AND stock &gt;= ?</text>
+    <text x="250" y="928" text-anchor="middle" class="small">changes = 1 ?</text>
+    <text x="250" y="992" text-anchor="middle" class="mono bold">COMMIT → { ok: true, orderId }</text>
+    <text x="250" y="1038" text-anchor="middle" class="small bold">Browser: cart.clear(), toast "Order placed",</text>
+    <text x="250" y="1051" text-anchor="middle" class="small bold">navigate to /orders/$id</text>
+
+    <!-- main arrows -->
+    <g stroke="#1b1d1a" stroke-width="1.2" marker-end="url(#fa)">
+      <line x1="250" y1="44" x2="250" y2="62"/>
+      <line x1="250" y1="108" x2="250" y2="120"/>
+      <line x1="250" y1="182" x2="250" y2="198"/>
+      <line x1="250" y1="260" x2="250" y2="276"/>
+      <line x1="250" y1="338" x2="250" y2="356"/>
+      <line x1="250" y1="388" x2="250" y2="406"/>
+      <line x1="250" y1="452" x2="250" y2="468"/>
+      <line x1="250" y1="530" x2="250" y2="548"/>
+      <line x1="250" y1="594" x2="250" y2="610"/>
+      <line x1="250" y1="684" x2="250" y2="702"/>
+      <line x1="250" y1="748" x2="250" y2="766"/>
+      <line x1="250" y1="798" x2="250" y2="816"/>
+      <line x1="250" y1="876" x2="250" y2="894"/>
+      <line x1="250" y1="952" x2="250" y2="970"/>
+      <line x1="250" y1="1002" x2="250" y2="1022"/>
+    </g>
+    <g class="tiny">
+      <text x="256" y="194">yes</text><text x="256" y="272">yes</text><text x="256" y="350">no</text>
+      <text x="256" y="542">yes</text><text x="256" y="696">yes</text><text x="256" y="964">yes</text>
+    </g>
+
+    <!-- pre-transaction exits -->
+    <g stroke="#a6382b" stroke-width="1.2" fill="none" marker-end="url(#fr)">
+      <line x1="380" y1="152" x2="468" y2="152"/>
+      <line x1="380" y1="230" x2="468" y2="230"/>
+      <line x1="380" y1="308" x2="468" y2="308"/>
+    </g>
+    <g class="tiny"><text x="388" y="146">no</text><text x="388" y="224">no</text><text x="388" y="302">yes</text></g>
+    <g fill="#f8e6e2" stroke="#a6382b">
+      <rect x="470" y="134" width="200" height="36"/>
+      <rect x="470" y="212" width="200" height="36"/>
+      <rect x="470" y="290" width="200" height="36"/>
+    </g>
+    <text x="570" y="149" text-anchor="middle" class="small">Rejected by validator;</text>
+    <text x="570" y="162" text-anchor="middle" class="small">handler never runs</text>
+    <text x="570" y="227" text-anchor="middle" class="mono">{ error: "Sign in to</text>
+    <text x="570" y="240" text-anchor="middle" class="mono">place an order." }</text>
+    <text x="570" y="305" text-anchor="middle" class="mono">{ error: "Enter a</text>
+    <text x="570" y="318" text-anchor="middle" class="mono">delivery address." }</text>
+
+    <!-- in-transaction throw bus -->
+    <g stroke="#a6382b" stroke-width="1.2" fill="none">
+      <line x1="370" y1="500" x2="570" y2="500"/>
+      <line x1="400" y1="648" x2="570" y2="648"/>
+      <line x1="360" y1="924" x2="570" y2="924"/>
+      <line x1="570" y1="500" x2="570" y2="968" marker-end="url(#fr)"/>
+    </g>
+    <g class="tiny"><text x="378" y="494">no → throw</text><text x="408" y="642">no → throw</text><text x="368" y="918">no → throw</text></g>
+    <text x="578" y="580" class="tiny">"Quantity must be…"</text>
+    <text x="578" y="592" class="tiny">"at most 50 of one item"</text>
+    <text x="578" y="720" class="tiny">"no longer available"</text>
+    <text x="578" y="732" class="tiny">"Not enough stock for …"</text>
+    <rect x="470" y="970" width="200" height="44" fill="#f8e6e2" stroke="#a6382b"/>
+    <text x="570" y="988" text-anchor="middle" class="mono bold">ROLLBACK</text>
+    <text x="570" y="1003" text-anchor="middle" class="small">catch → { error: err.message }</text>
+    <line x1="570" y1="1014" x2="570" y2="1028" stroke="#a6382b" stroke-width="1.2" marker-end="url(#fr)"/>
+    <rect x="470" y="1030" width="200" height="34" fill="#fff" stroke="#a6382b"/>
+    <text x="570" y="1044" text-anchor="middle" class="small">Shown under the form (role="alert");</text>
+    <text x="570" y="1057" text-anchor="middle" class="small">cart kept; stock untouched</text>
+  </svg>
+  <figcaption><b>Figure A3.</b>Order placement, following the code's actual branches. The quantity cap is checked twice: once per incoming line, and again after duplicate lines are merged, because three lines of 20 each pass alone but add up to 60. The <code>AND stock &gt;= ?</code> guard on the <code>UPDATE</code> is a second line of defence at the database, so even a future code path that skips validation cannot push stock below zero.</figcaption>
+  </figure>
+</section>
+
+<section class="chapter flow">
+  <h3>A.3.4 Order status lifecycle</h3>
+  <p>An order's <code>status</code> column takes one of four values. Below is the intended flow, as implied by the labels the UI shows a customer, next to what the code actually enforces.</p>
+  <figure>
+  <svg viewBox="0 0 680 150" role="img" aria-label="Order status lifecycle">
+    <defs><marker id="sa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1b1d1a"/></marker></defs>
+    <circle cx="14" cy="40" r="6" fill="#1b1d1a"/>
+    <line x1="20" y1="40" x2="48" y2="40" stroke="#1b1d1a" marker-end="url(#sa)"/>
+    <rect x="50" y="20" width="150" height="40" rx="20" fill="#fff" stroke="#1b1d1a"/>
+    <text x="125" y="37" text-anchor="middle" class="small bold">pending</text>
+    <text x="125" y="50" text-anchor="middle" class="tiny">"Awaiting payment"</text>
+    <rect x="270" y="20" width="150" height="40" rx="20" fill="#e5f1e8" stroke="#0a7a3b"/>
+    <text x="345" y="37" text-anchor="middle" class="small bold">confirmed</text>
+    <text x="345" y="50" text-anchor="middle" class="tiny">transfer received</text>
+    <rect x="490" y="20" width="150" height="40" rx="20" fill="#fff" stroke="#1b1d1a"/>
+    <text x="565" y="37" text-anchor="middle" class="small bold">delivered</text>
+    <text x="565" y="50" text-anchor="middle" class="tiny">handed over / collected</text>
+    <rect x="270" y="98" width="150" height="40" rx="20" fill="#f8e6e2" stroke="#a6382b"/>
+    <text x="345" y="122" text-anchor="middle" class="small bold">cancelled</text>
+    <g stroke="#1b1d1a" marker-end="url(#sa)">
+      <line x1="200" y1="40" x2="268" y2="40"/>
+      <line x1="420" y1="40" x2="488" y2="40"/>
+      <line x1="160" y1="60" x2="276" y2="104"/>
+      <line x1="345" y1="60" x2="345" y2="96"/>
+    </g>
+    <text x="452" y="96" class="tiny">Enforced in code: status ∈ STATUSES (store-actions.ts:60).</text>
+    <text x="452" y="108" class="tiny">Any state can be set from any state.</text>
+    <text x="452" y="120" class="tiny">Cancelling does not return stock.</text>
+  </svg>
+  <figcaption><b>Figure A4.</b>Intended order lifecycle. The admin's status menu lets any of the four values be picked at any time. The server checks only that the value is one of the four, so the arrows show the intended flow, not a rule the code enforces.</figcaption>
+  </figure>
+</section>
+
+<section class="chapter" id="a4">
+  <h2><span class="num">A.4</span>Implementation</h2>
+  <dl class="kv">
+    <dt>Language</dt><dd>TypeScript 7 in strict mode, plus one plain ES module (<code>scripts/serve.mjs</code>)</dd>
+    <dt>Framework</dt><dd>TanStack Start 1.168 (SSR + server functions) on Vite 8, with TanStack Router 1.170 for file-based routes</dd>
+    <dt>UI</dt><dd>React 19, shadcn/ui components on Base UI, Tailwind CSS 4, lucide icons, sonner toasts</dd>
+    <dt>Data fetching</dt><dd>TanStack React Query 5, one client per browser tab</dd>
+    <dt>Validation</dt><dd>zod 4 at the checkout boundary. Hand-written guards in the admin and auth functions.</dd>
+    <dt>Database</dt><dd><code>node:sqlite</code>, built into Node.js. There is no ORM or query builder: queries are hand-written SQL with positional parameters.</dd>
+    <dt>Crypto</dt><dd><code>node:crypto</code>: scrypt, randomBytes, timingSafeEqual</dd>
+    <dt>Tooling</dt><dd>oxlint, oxfmt, tsc, tsx (scripts), @tanstack/router-cli (route tree generation)</dd>
+  </dl>
+
+  <h3>A.4.1 File layering</h3>
+  <p>TanStack Start refuses to bundle server-only modules into the client, and that check is transitive. The code therefore follows a strict layering, which the README documents and the source follows:</p>
+  <table>
+    <thead><tr><th style="width:28%">Layer</th><th style="width:30%">Files</th><th>Rule</th></tr></thead>
+    <tbody>
+      <tr><td>Routes / components</td><td><code>src/routes/*.tsx</code>, <code>src/components</code></td><td>Never import <code>*-data.ts</code>. They call server functions or use React Query options.</td></tr>
+      <tr><td>RPC boundary</td><td><code>*-api.ts</code>, <code>*-actions.ts</code></td><td>Each export is a <code>createServerFn</code>. Its body is stripped from the client bundle.</td></tr>
+      <tr><td>Data access</td><td><code>products-data.ts</code>, <code>orders-data.ts</code>, <code>auth-data.ts</code>, <code>session-data.ts</code></td><td>The only files with SQL or cookies.</td></tr>
+      <tr><td>Connection</td><td><code>lib/db/client.ts</code></td><td>Wrapped in <code>createServerOnlyFn</code>: it throws if reached from the client. It applies the schema on first connect.</td></tr>
+      <tr><td>Shared types</td><td><code>lib/types.ts</code></td><td>Plain interfaces, safe to import on either side.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>A.4.2 Representative code: the checkout boundary</h3>
+  <p>This is the whole checkout server function. The zod schema validates the request for real, because TypeScript types disappear at the network boundary. The handler then adds the checks zod cannot express: a session must exist, and delivery needs an address. Errors are <em>returned</em> rather than thrown, and redirects are left to the caller. The source comment explains why: a redirect thrown inside a server function was serialised to the browser but never applied, so the customer stayed on <code>/checkout</code>.</p>
+  <p class="src">src/lib/checkout-api.ts · lines 15–59</p>
+<pre><code class="language-typescript">const lineSchema = z.object({
+  productId: z.number().int().positive(),
+  qty: z.number().int().min(1).max(50),
+});
+
+const checkoutSchema = z.object({
+  fulfilment: z.enum(["delivery", "pickup"]),
+  address: z.string().trim().max(500).default(""),
+  phone: z.string().trim().min(1).max(40),
+  items: z.array(lineSchema).min(1).max(100),
+});
+
+export const placeOrderFn = createServerFn({ method: "POST" })
+  .validator(checkoutSchema)
+  .handler(async ({ data }) => {
+    const user = currentUser();
+    if (!user) return { error: "Sign in to place an order." as const };
+
+    const address = data.address.trim();
+    if (data.fulfilment === "delivery" && !address) {
+      return { error: "Enter a delivery address." as const };
+    }
+
+    let orderId: number;
+    try {
+      orderId = createOrder({
+        userId: user.id,
+        fulfilment: data.fulfilment,
+        address: data.fulfilment === "delivery" ? address : null,
+        phone: data.phone,
+        items: data.items,
+      });
+    } catch (err) {
+      // Stock and quantity failures are raised inside the transaction.
+      const message = err instanceof Error ? err.message : "Could not place the order.";
+      return { error: message };
+    }
+
+    return { ok: true as const, orderId };
+  });</code></pre>
+  <p>In the browser, <code>routes/checkout.tsx</code> builds the request from cart lines, keeping only <code>productId</code> and <code>qty</code> (<em>"Only ids and quantities are sent. The server owns pricing."</em>). On success it clears the cart and navigates to the order page.</p>
+
+  <h3>A.4.3 Other implementation decisions worth noting</h3>
+  <ul>
+    <li><strong>Session lookup and cleanup.</strong> <code>userForToken</code> joins <code>sessions</code> to <code>users</code> and checks expiry on every read. On roughly every 100th read it also deletes expired sessions, so a token that is never presented again does not linger forever, and no cron job is needed.</li>
+    <li><strong>Schema in TypeScript.</strong> The DDL lives in a string in <code>lib/db/schema.ts</code>, not a <code>.sql</code> file, because reading a <code>.sql</code> file with <code>fs</code> broke in production (it was not copied into <code>dist/</code>). Every statement is <code>CREATE … IF NOT EXISTS</code> and runs on each connection.</li>
+    <li><strong>No route loaders for data.</strong> Pages fetch with <code>useQuery</code> and show skeletons, so navigation never waits on a server round trip. Only access control (<code>beforeLoad</code> on <code>/admin</code>, <code>/checkout</code>, <code>/orders</code>) blocks.</li>
+    <li><strong>One query client per request or tab.</strong> <code>getQueryClient()</code> returns a fresh client on the server. A shared module-level client would leak one visitor's cached session to the next.</li>
+  </ul>
+</section>
+
+<section class="chapter" id="a5">
+  <h2><span class="num">A.5</span>Testing</h2>
+  <div class="note warn">
+    <span class="label">Honest status</span>
+    <p>The repository has <strong>no automated tests</strong>: no <code>*.test.*</code> or <code>*.spec.*</code> files, no test runner (Vitest, Jest or Playwright Test) in <code>package.json</code>, no <code>test</code> script and no CI workflow. Everything below was either static checking or a manual or scripted run against the live app while preparing this documentation.</p>
+  </div>
+
+  <h3>A.5.1 What does exist: static verification</h3>
+  <p><code>npm run verify</code> chains four checks. Each was run on the code as fixed in this documentation:</p>
+  <table>
+    <thead><tr><th style="width:30%">Check</th><th style="width:30%">Command</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>Type checking</td><td><code>tsc --noEmit</code></td><td>Pass, no errors</td></tr>
+      <tr><td>Lint</td><td><code>oxlint src scripts</code></td><td>Pass, no findings</td></tr>
+      <tr><td>Formatting</td><td><code>oxfmt --check .</code></td><td>Pass ("All matched files use the correct format", 59 files)</td></tr>
+      <tr><td>Production build</td><td><code>vite build</code></td><td>Pass. Client and SSR bundles emitted (<code>dist/server/server.js</code> 80 kB)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>A.5.2 Behaviour exercised against the running app</h3>
+  <p>These were driven through the real UI with Playwright (headless Chromium, 1280 × 820) and confirmed by reading the database afterwards.</p>
+  <table>
+    <thead><tr><th style="width:38%">Scenario</th><th style="width:36%">Expected</th><th>Observed</th></tr></thead>
+    <tbody>
+      <tr><td>Signed-out visitor opens <code>/admin</code>, <code>/orders</code></td><td>Redirected</td><td>Pass. HTTP 307. <code>/admin</code> sends the browser to <code>/</code>.</td></tr>
+      <tr><td>Register two customers, place three orders (one delivery, two collection)</td><td>Orders stored with server-computed totals</td><td>Pass. Order #1 ₦54,000 + ₦2,000 = ₦56,000. #2 ₦12,500. #3 ₦60,500.</td></tr>
+      <tr><td>Stock reduced exactly by quantities ordered</td><td>e.g. USB-C cable 22 → 20, lightning cable 30 → 27</td><td>Pass, all six products reconcile with the seed values</td></tr>
+      <tr><td>Stored subtotal equals Σ(price × qty) of its lines</td><td>Equal for every order</td><td>Pass (query in §B.4, Q10)</td></tr>
+      <tr><td>Admin changes status (pending → confirmed, pending → delivered)</td><td>Customer sees the new badge</td><td>Pass. Order #1 shows "Confirmed" to Chidinma.</td></tr>
+      <tr><td>Customer B opens Customer A's order URL</td><td>Refused</td><td>Pass. Tunde sees "We could not find that page", with no address or totals leaked.</td></tr>
+      <tr><td>Customer opens <code>/orders/1</code> (own order)</td><td>Order detail page</td><td><strong>Fail before fix:</strong> the order list rendered instead. Pass after the route fix (below).</td></tr>
+      <tr><td><code>npm run build</code> then <code>scripts/serve.mjs</code></td><td>Starts, verifies manifest, serves</td><td>Pass. "asset manifest ok (33 files referenced)". <code>/</code>, <code>/shop</code>, <code>/products/1</code>, <code>/login</code> return 200.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>A.5.3 Defect found: order detail route never rendered</h3>
+  <p>In TanStack Router's file naming, <code>orders.$id.tsx</code> is a <em>child</em> of <code>orders.tsx</code>. The generated route tree had <code>getParentRoute: () =&gt; OrdersRoute</code>. A child renders inside its parent's <code>&lt;Outlet /&gt;</code>, and <code>routes/orders.tsx</code> has none, so visiting <code>/orders/1</code> showed the order list. The same happened to the page <code>checkout.tsx</code> navigates to after every successful order, so a customer never saw the "Next step: you will get a call" panel.</p>
+  <p>The fix renames the file to <code>orders_.$id.tsx</code>. The trailing underscore tells the router to keep the URL <code>/orders/$id</code> but attach the route to the root. The <code>createFileRoute</code> id was updated to match and the route tree regenerated. No links had to change.</p>
+
+  <h3>A.5.4 Not tested, and worth testing first</h3>
+  <ul>
+    <li><strong>Concurrent checkouts for the last unit.</strong> The transaction design is sound by inspection, but nothing exercises it.</li>
+    <li><strong>The oversell paths:</strong> duplicate lines adding up to more than 50, quantity above stock, a product deleted mid-cart.</li>
+    <li><strong>Image upload validation:</strong> polyglot files, more than 4 MB, a wrong extension on valid bytes.</li>
+    <li><strong>Session expiry and the probabilistic sweep,</strong> and <code>set-password.ts</code> signing out existing sessions.</li>
+    <li><strong>Non-admin calls to admin server functions</strong> made directly, not through the UI.</li>
+  </ul>
+  <p>Most of <code>createOrder</code> and <code>auth-data.ts</code> could be unit-tested with Node's built-in test runner against a temporary <code>DATA_DIR</code>, without adding a framework.</p>
+</section>
+
+<section class="chapter" id="a6">
+  <h2><span class="num">A.6</span>Deployment</h2>
+  <p>The app targets one machine with a persistent disk, such as a VPS or a computer in the shop. It is not suitable for serverless hosting, because the database is a local file. Everything below comes from <code>package.json</code>, <code>scripts/</code>, <code>.env.example</code> and the README.</p>
+
+  <h3>A.6.1 Commands</h3>
+<pre><code class="language-bash"># one-time setup on the server (Node 22.5 or newer)
+npm ci
+npm run db:seed                       # creates data/store.db, 6 products, admin account
+npm run user:password -- admin@adetunji.shop 'a-long-unique-password'
+
+# release
+npm run build                         # vite build → dist/client + dist/server/server.js
+PORT=3000 HOST=0.0.0.0 npm run serve  # node scripts/serve.mjs, run under pm2/systemd
+# or both in one step:
+npm run deploy                        # = npm run build &amp;&amp; npm run serve</code></pre>
+
+  <h3>A.6.2 Configuration</h3>
+  <table>
+    <thead><tr><th style="width:22%">Variable</th><th style="width:22%">Default</th><th>Used by</th></tr></thead>
+    <tbody>
+      <tr><td><code>DATA_DIR</code></td><td><code>./data</code></td><td><code>lib/db/client.ts</code>, resolved against the working directory. Holds <code>store.db</code>.</td></tr>
+      <tr><td><code>PORT</code> / <code>HOST</code></td><td><code>3000</code> / <code>0.0.0.0</code></td><td><code>scripts/serve.mjs</code></td></tr>
+      <tr><td><code>ADMIN_EMAIL</code> / <code>ADMIN_PASSWORD</code></td><td><code>admin@adetunji.shop</code> / <code>changeme123</code></td><td><code>scripts/seed.ts</code> only, on first seed</td></tr>
+    </tbody>
+  </table>
+
+  <h3>A.6.3 Why a custom server</h3>
+  <p><code>vite build</code> for TanStack Start produces a fetch handler, not a listening server, and <code>vite preview</code> does not run it. <code>scripts/serve.mjs</code> fills that gap. It mounts the handler on <code>node:http</code> and serves static assets with long-lived caching for hashed files. It serves <code>/uploads/*</code> from the real <code>public/uploads</code> directory, with a path-traversal guard, and buffers request bodies so server-function POSTs arrive intact. At startup it renders <code>/</code> and refuses to run if any referenced asset is missing on disk, which catches the case where the server was not restarted after a rebuild.</p>
+
+  <h3>A.6.4 HTTPS, testing over the internet, and backup</h3>
+  <ul>
+    <li>Terminate TLS at a reverse proxy in front of <code>serve.mjs</code>.</li>
+    <li>For a quick test from a phone, the README uses a Cloudflare quick tunnel: <code>cloudflared tunnel --url http://localhost:3002</code>.</li>
+    <li><strong>Backup:</strong> copy <code>data/store.db</code>. With WAL mode enabled, copy while the server is stopped, or use SQLite's online backup, so the <code>-wal</code> file is included. Uploaded images in <code>public/uploads</code> also need copying. The README says <em>"Nothing else is stateful"</em>, which leaves those images out.</li>
+  </ul>
+  <div class="note warn">
+    <span class="label">README and code disagree</span>
+    <p>The README says the session cookie "is not marked <code>secure</code>". The code (<code>session-data.ts:21</code>) sets <code>secure: process.env.NODE_ENV === "production"</code>, and the production bundle compiles this to <code>secure: true</code> (checked in <code>dist/server</code>). In practice a production build needs HTTPS for sign-in to work, except on <code>localhost</code>, which browsers treat as secure. Serving the build over plain HTTP on a LAN address would silently drop the cookie.</p>
+  </div>
+</section>
+
+<section class="chapter" id="a7">
+  <h2><span class="num">A.7</span>Screenshots</h2>
+  <p>All screens were captured from the running application at <code>http://localhost:3000</code> with the seeded catalogue and the orders described in the Summary. The seed sets no product images, so the cards show the app's own "No image" placeholder.</p>
+
+  <figure class="shot"><img src="screenshots/01-home.png" alt="Home page"><figcaption><b>Figure A5.</b>Home (<code>/</code>), signed out. A hero with links to the shop and order tracking, three promises ("Confirmed by hand", "Delivered or collected", "Stock you can trust"), and the six newest products.</figcaption></figure>
+  <figure class="shot"><img src="screenshots/02-shop.png" alt="Shop listing"><figcaption><b>Figure A6.</b>Shop (<code>/shop</code>). The full catalogue, newest first (<code>ORDER BY id DESC</code>), with price and live stock. This was captured before any orders, so it shows the seeded counts.</figcaption></figure>
+  <figure class="shot"><img src="screenshots/03-product-detail.png" alt="Product detail"><figcaption><b>Figure A7.</b>Product detail (<code>/products/4</code>). The quantity stepper is capped at the stock count, and "Add to cart" becomes "Sold out" at zero.</figcaption></figure>
+  <div class="pair">
+    <figure class="shot"><img src="screenshots/04-login.png" alt="Sign in"><figcaption><b>Figure A8.</b>Sign in (<code>/login</code>). One form serves customers and the owner.</figcaption></figure>
+    <figure class="shot"><img src="screenshots/05-register.png" alt="Create account"><figcaption><b>Figure A9.</b>Create account tab: name, email, and a password of at least 8 characters.</figcaption></figure>
+  </div>
+  <figure class="shot"><img src="screenshots/06-cart.png" alt="Cart"><figcaption><b>Figure A10.</b>Cart (<code>/cart</code>). Lines and subtotal come from browser storage. The prices shown here are display-only: the server re-prices every order.</figcaption></figure>
+  <figure class="shot"><img src="screenshots/07-checkout.png" alt="Checkout"><figcaption><b>Figure A11.</b>Checkout (<code>/checkout</code>) for delivery to Lekki Phase 1, Lagos, with the ₦2,000 delivery fee added. The select shows the raw value "delivery" rather than its label, a minor UI quirk.</figcaption></figure>
+  <figure class="shot"><img src="screenshots/08-order-detail-pending.png" alt="Pending order detail"><figcaption><b>Figure A12.</b>Order detail for a pending collection order (#2). The "Next step" panel appears only while the status is <code>pending</code> and tells the customer to expect a call with transfer details.</figcaption></figure>
+  <figure class="shot"><img src="screenshots/09-order-history.png" alt="Order history"><figcaption><b>Figure A13.</b>Order history (<code>/orders</code>) for Chidinma Okafor, newest first, with a status badge for each order.</figcaption></figure>
+  
+  <div class="pair">
+    <figure class="shot"><img src="screenshots/11-admin-add-product.png" alt="Add product form"><figcaption><b>Figure A14.</b>Add product form: name, description, price (whole ₦), stock and optional image.</figcaption></figure>
+    <figure class="shot"><img src="screenshots/12-admin-edit-product.png" alt="Edit product form"><figcaption><b>Figure A15.</b>The same form in edit mode for the 65W GaN dual port, with Delete.</figcaption></figure>
+  </div>
+  <figure class="shot"><img src="screenshots/13-admin-orders-updated.png" alt="Admin with updated orders"><figcaption><b>Figure A16.</b>Admin after the owner recorded a transfer (#1 → confirmed) and a collection (#3 → delivered). Stock now reflects the three orders.</figcaption></figure>
+  <figure class="shot"><img src="screenshots/14-order-detail-confirmed.png" alt="Confirmed order"><figcaption><b>Figure A17.</b>The customer's view of order #1 after confirmation. The line prices come from the snapshot in <code>order_items</code>, not from the current product price.</figcaption></figure>
+  <figure class="shot phone"><img src="screenshots/15-mobile-dark-shop.png" alt="Mobile dark mode"><figcaption><b>Figure A18.</b>The shop at phone width (390 px) in dark mode. The side navigation becomes a bottom tab bar.</figcaption></figure>
+</section>
+
+<section class="chapter" id="a8">
+  <h2><span class="num">A.8</span>Source code listing</h2>
+  <h3>A.8.1 Database schema</h3>
+  <p class="src">src/lib/db/schema.ts · the SCHEMA string, applied on every connection</p>
+<pre><code class="language-sql">CREATE TABLE IF NOT EXISTS users (
+  id            INTEGER PRIMARY KEY AUTOINCREMENT,
+  email         TEXT    NOT NULL UNIQUE,
+  name          TEXT    NOT NULL,
+  password_hash TEXT    NOT NULL,
+  is_admin      INTEGER NOT NULL DEFAULT 0,
+  created_at    TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS sessions (
+  token      TEXT    PRIMARY KEY,
+  user_id    INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  created_at TEXT    NOT NULL DEFAULT (datetime('now')),
+  expires_at TEXT    NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_sessions_user ON sessions(user_id);
+CREATE INDEX IF NOT EXISTS idx_sessions_expiry ON sessions(expires_at);
+
+CREATE TABLE IF NOT EXISTS products (
+  id          INTEGER PRIMARY KEY AUTOINCREMENT,
+  name        TEXT    NOT NULL,
+  description TEXT    NOT NULL DEFAULT '',
+  price       INTEGER NOT NULL,
+  stock       INTEGER NOT NULL DEFAULT 0,
+  image_path  TEXT,
+  created_at  TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS orders (
+  id            INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id       INTEGER NOT NULL REFERENCES users(id),
+  -- 'pending' | 'confirmed' | 'delivered' | 'cancelled'
+  status        TEXT    NOT NULL DEFAULT 'pending',
+  -- 'delivery' | 'pickup'
+  fulfilment    TEXT    NOT NULL,
+  address       TEXT,
+  phone         TEXT    NOT NULL,
+  subtotal      INTEGER NOT NULL,
+  delivery_fee  INTEGER NOT NULL DEFAULT 0,
+  total         INTEGER NOT NULL,
+  created_at    TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_orders_user ON orders(user_id);
+
+CREATE TABLE IF NOT EXISTS order_items (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  order_id   INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+  product_id INTEGER NOT NULL REFERENCES products(id),
+  -- Name and price are copied at purchase time so history stays correct
+  -- if the product is later renamed or repriced.
+  name       TEXT    NOT NULL,
+  price      INTEGER NOT NULL,
+  qty        INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_order_items_order ON order_items(order_id);</code></pre>
+
+  <h3>A.8.2 <code>createOrder</code>: the transactional core</h3>
+  <p class="src">src/lib/orders-data.ts · lines 6–115</p>
+<pre><code class="language-typescript">export const DELIVERY_FEE = 2000;
+
+/** Caps a single product line so a request cannot create unbounded rows. */
+const MAX_QTY_PER_LINE = 50;
+
+export function createOrder(input: {
+  userId: number;
+  fulfilment: Fulfilment;
+  address: string | null;
+  phone: string;
+  items: { productId: number; qty: number }[];
+}): number {
+  db().exec("BEGIN");
+  try {
+    // Merge duplicate lines before anything else. A request can contain the
+    // same product many times, and each line would otherwise be validated
+    // against the same pre-decrement stock reading, overselling the item.
+    const wanted = new Map&lt;number, number&gt;();
+    for (const item of input.items) {
+      if (!Number.isInteger(item.qty) || item.qty &lt; 1) {
+        throw new Error("Quantity must be a whole number of at least 1.");
+      }
+      if (item.qty &gt; MAX_QTY_PER_LINE) {
+        throw new Error(`You can order at most ${MAX_QTY_PER_LINE} of one item.`);
+      }
+      wanted.set(item.productId, (wanted.get(item.productId) ?? 0) + item.qty);
+    }
+
+    const lines: { productId: number; name: string; price: number; qty: number }[] = [];
+
+    for (const [productId, qty] of wanted) {
+      if (qty &gt; MAX_QTY_PER_LINE) {
+        throw new Error(`You can order at most ${MAX_QTY_PER_LINE} of one item.`);
+      }
+      const product = one&lt;{ id: number; name: string; price: number; stock: number }&gt;(
+        "SELECT id, name, price, stock FROM products WHERE id = ?",
+        productId,
+      );
+      if (!product) throw new Error("One of the items is no longer available.");
+      if (product.stock &lt; qty) throw new Error(`Not enough stock for ${product.name}`);
+
+      lines.push({ productId: product.id, name: product.name, price: product.price, qty });
+    }
+
+    const subtotal = lines.reduce((n, i) =&gt; n + i.price * i.qty, 0);
+    const deliveryFee = input.fulfilment === "delivery" ? DELIVERY_FEE : 0;
+    const total = subtotal + deliveryFee;
+
+    const r = run(
+      `INSERT INTO orders (user_id, status, fulfilment, address, phone, subtotal, delivery_fee, total)
+       VALUES (?, 'pending', ?, ?, ?, ?, ?, ?)`,
+      input.userId, input.fulfilment, input.address, input.phone, subtotal, deliveryFee, total,
+    );
+    const orderId = Number(r.lastInsertRowid);
+
+    for (const item of lines) {
+      run(
+        "INSERT INTO order_items (order_id, product_id, name, price, qty) VALUES (?, ?, ?, ?, ?)",
+        orderId, item.productId, item.name, item.price, item.qty,
+      );
+      // The stock &gt;= qty guard makes negative stock impossible at the database
+      // level, so a future path that skips validation still cannot oversell.
+      const res = run(
+        "UPDATE products SET stock = stock - ? WHERE id = ? AND stock &gt;= ?",
+        item.qty, item.productId, item.qty,
+      );
+      if (res.changes !== 1) throw new Error(`Not enough stock for ${item.name}`);
+    }
+
+    db().exec("COMMIT");
+    return orderId;
+  } catch (err) {
+    db().exec("ROLLBACK");
+    throw err;
+  }
+}</code></pre>
+  <p class="muted" style="font-size:8.5pt">Some argument lists are joined onto single lines here to save space. The logic and statements match the file.</p>
+
+  <h3>A.8.3 <code>saveImage</code>: content-based upload validation</h3>
+  <p class="src">src/lib/admin-api.ts · lines 15–69</p>
+<pre><code class="language-typescript">type Format = { ext: string; matches: (b: Buffer) =&gt; boolean };
+
+const ALLOWED: Format[] = [
+  { ext: ".jpg",  matches: (b) =&gt; b.length &gt; 3 &amp;&amp; b[0] === 0xff &amp;&amp; b[1] === 0xd8 &amp;&amp; b[2] === 0xff },
+  { ext: ".png",  matches: (b) =&gt; b.length &gt; 8 &amp;&amp; b[0] === 0x89 &amp;&amp; b[1] === 0x50 &amp;&amp; b[2] === 0x4e &amp;&amp; b[3] === 0x47 },
+  { ext: ".webp", matches: (b) =&gt; b.length &gt; 12 &amp;&amp;
+      b.subarray(0, 4).toString("ascii") === "RIFF" &amp;&amp; b.subarray(8, 12).toString("ascii") === "WEBP" },
+  { ext: ".avif", matches: (b) =&gt; b.length &gt; 12 &amp;&amp;
+      b.subarray(4, 8).toString("ascii") === "ftyp" &amp;&amp; b.subarray(8, 12).toString("ascii").startsWith("avi") },
+];
+
+export const MAX_UPLOAD_BYTES = 4 * 1024 * 1024;
+
+async function saveImage(file: FormDataEntryValue | null): Promise&lt;string | null&gt; {
+  if (!(file instanceof File) || file.size === 0) return null;
+  if (file.size &gt; MAX_UPLOAD_BYTES) throw new Error("Image must be under 4MB.");
+
+  const bytes = Buffer.from(await file.arrayBuffer());
+  const format = ALLOWED.find((f) =&gt; f.matches(bytes));
+  if (!format) throw new Error("That file is not a JPG, PNG, WebP, or AVIF image.");
+
+  await mkdir(UPLOAD_DIR, { recursive: true });
+  const name = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}${format.ext}`;
+  await writeFile(join(UPLOAD_DIR, name), bytes);
+  return `/uploads/${name}`;
+}</code></pre>
+</section>
+
+<!-- ======================= PART B ======================= -->
+<div class="part-opener">
+  <div class="kicker">Part B</div>
+  <h1 class="part-title">Database Management</h1>
+  <p>The database engine, the schema and why it is shaped the way it is, the queries the application actually runs, and how they replace the shop's manual records.</p>
+  <ol>
+    <li><span>B.1</span>The DBMS and why it fits</li>
+    <li><span>B.2</span>Database design and ER diagram</li>
+    <li><span>B.3</span>Normalization</li>
+    <li><span>B.4</span>Queries written</li>
+    <li><span>B.5</span>Forms and reports</li>
+    <li><span>B.6</span>Automating the shop's record-keeping</li>
+  </ol>
+</div>
+
+<section class="chapter flow" id="b1">
+  <h2><span class="num">B.1</span>The DBMS and why it fits</h2>
+  <p>The store uses <strong>SQLite 3.50.4</strong> through <code>node:sqlite</code>, the SQLite binding built into Node.js (24.7 was used here; the README asks for 22.5 or newer). The database is a single file, <code>data/store.db</code>, opened once per process with <code>DatabaseSync</code> and cached on <code>globalThis</code> so dev-server reloads do not leak handles.</p>
+  <p>Two pragmas are set on every connection:</p>
+  <ul>
+    <li><code>journal_mode = WAL</code>. Readers do not block the writer, so customers can keep browsing while an order commits.</li>
+    <li><code>foreign_keys = ON</code>. SQLite leaves foreign keys off by default. Here they are enforced, which is what makes deleting a product that appears in a past order fail. The admin page turns that failure into the message "Set its stock to 0 to retire it."</li>
+  </ul>
+  <h3>Why SQLite fits this deployment</h3>
+  <table>
+    <thead><tr><th style="width:32%">Property of the shop</th><th>Consequence for the DBMS choice</th></tr></thead>
+    <tbody>
+      <tr><td>One shop, one server, one process</td><td>There is no second application server that needs network access to the data. An embedded engine skips a database server, its credentials and its network port.</td></tr>
+      <tr><td>Low write volume (orders arrive one at a time)</td><td>SQLite allows one writer at a time. For a small shop, writes take milliseconds and never queue in practice.</td></tr>
+      <tr><td>Run by a shop owner, not a DBA</td><td>No service to install, tune or upgrade. Backup is a file copy (§A.6.4).</td></tr>
+      <tr><td>Correctness matters more than scale</td><td>Full ACID transactions, foreign keys and <code>UNIQUE</code> constraints: everything <code>createOrder</code> relies on.</td></tr>
+      <tr><td>Built-in to the runtime</td><td>No native npm driver to compile, so <code>npm ci</code> on a fresh VPS is enough.</td></tr>
+    </tbody>
+  </table>
+  <p>The README states the trade-off plainly: this is <em>"built for a single VPS or home server, not serverless, because the database is a local file."</em> Running several app servers behind a load balancer would mean moving to a client–server DBMS such as PostgreSQL. The plain SQL used throughout would carry over with few changes.</p>
+</section>
+
+<section class="chapter" id="b2">
+  <h2><span class="num">B.2</span>Database design and ER diagram</h2>
+  <p>Five tables. Two describe people and their logins (<code>users</code>, <code>sessions</code>), one the catalogue (<code>products</code>), and two the sales ledger (<code>orders</code>, <code>order_items</code>). All keys are integer surrogates except <code>sessions.token</code>, a random 64-character hex string that is itself the secret.</p>
+
+  <figure>
+  <svg viewBox="0 0 700 360" role="img" aria-label="Entity relationship diagram">
+    <g font-size="9.5">
+    <!-- users -->
+    <rect x="10" y="10" width="170" height="118" fill="#fff" stroke="#1b1d1a"/>
+    <rect x="10" y="10" width="170" height="22" fill="#1b1d1a"/>
+    <text x="20" y="25" class="small bold" style="fill:#fff">users</text>
+    <g class="mono"><text x="20" y="46"><tspan style="fill:#0a7a3b;font-weight:600">PK</tspan> id</text><text x="20" y="62"><tspan style="fill:#2c5a85">UQ</tspan> email</text><text x="20" y="78">   name</text><text x="20" y="94">   password_hash</text><text x="20" y="110">   is_admin</text><text x="20" y="126" style="fill:#5d625a">   created_at</text></g>
+    <!-- sessions -->
+    <rect x="10" y="230" width="170" height="86" fill="#fff" stroke="#1b1d1a"/>
+    <rect x="10" y="230" width="170" height="22" fill="#1b1d1a"/>
+    <text x="20" y="245" class="small bold" style="fill:#fff">sessions</text>
+    <g class="mono"><text x="20" y="266"><tspan style="fill:#0a7a3b;font-weight:600">PK</tspan> token</text><text x="20" y="282"><tspan style="fill:#a6382b;font-weight:600">FK</tspan> user_id</text><text x="20" y="298" style="fill:#5d625a">   created_at</text><text x="20" y="314">   expires_at</text></g>
+    <!-- orders -->
+    <rect x="260" y="10" width="180" height="182" fill="#fff" stroke="#1b1d1a"/>
+    <rect x="260" y="10" width="180" height="22" fill="#0a7a3b"/>
+    <text x="270" y="25" class="small bold" style="fill:#fff">orders</text>
+    <g class="mono"><text x="270" y="46"><tspan style="fill:#0a7a3b;font-weight:600">PK</tspan> id</text><text x="270" y="62"><tspan style="fill:#a6382b;font-weight:600">FK</tspan> user_id</text><text x="270" y="78">   status</text><text x="270" y="94">   fulfilment</text><text x="270" y="110">   address</text><text x="270" y="126">   phone</text><text x="270" y="142">   subtotal</text><text x="270" y="158">   delivery_fee</text><text x="270" y="174">   total</text><text x="270" y="190" style="fill:#5d625a">   created_at</text></g>
+    <!-- products -->
+    <rect x="520" y="10" width="170" height="134" fill="#fff" stroke="#1b1d1a"/>
+    <rect x="520" y="10" width="170" height="22" fill="#1b1d1a"/>
+    <text x="530" y="25" class="small bold" style="fill:#fff">products</text>
+    <g class="mono"><text x="530" y="46"><tspan style="fill:#0a7a3b;font-weight:600">PK</tspan> id</text><text x="530" y="62">   name</text><text x="530" y="78">   description</text><text x="530" y="94">   price</text><text x="530" y="110">   stock</text><text x="530" y="126">   image_path</text><text x="530" y="142" style="fill:#5d625a">   created_at</text></g>
+    <!-- order_items -->
+    <rect x="520" y="230" width="170" height="118" fill="#fff" stroke="#1b1d1a"/>
+    <rect x="520" y="230" width="170" height="22" fill="#0a7a3b"/>
+    <text x="530" y="245" class="small bold" style="fill:#fff">order_items</text>
+    <g class="mono"><text x="530" y="266"><tspan style="fill:#0a7a3b;font-weight:600">PK</tspan> id</text><text x="530" y="282"><tspan style="fill:#a6382b;font-weight:600">FK</tspan> order_id</text><text x="530" y="298"><tspan style="fill:#a6382b;font-weight:600">FK</tspan> product_id</text><text x="530" y="314">   name <tspan style="fill:#5d625a">(snapshot)</tspan></text><text x="530" y="330">   price <tspan style="fill:#5d625a">(snapshot)</tspan></text><text x="530" y="346">   qty</text></g>
+    </g>
+
+    <!-- relationships -->
+    <g stroke="#1b1d1a" stroke-width="1.2" fill="none">
+      <!-- users 1 — N sessions -->
+      <line x1="95" y1="128" x2="95" y2="230"/>
+      <line x1="88" y1="136" x2="102" y2="136"/><line x1="88" y1="141" x2="102" y2="141"/>
+      <line x1="95" y1="218" x2="87" y2="230"/><line x1="95" y1="218" x2="103" y2="230"/>
+      <circle cx="95" cy="212" r="3.5" fill="#fff"/>
+      <!-- users 1 — N orders -->
+      <line x1="180" y1="50" x2="260" y2="50"/>
+      <line x1="188" y1="43" x2="188" y2="57"/><line x1="193" y1="43" x2="193" y2="57"/>
+      <line x1="248" y1="50" x2="260" y2="42"/><line x1="248" y1="50" x2="260" y2="58"/>
+      <circle cx="242" cy="50" r="3.5" fill="#fff"/>
+      <!-- orders 1 — N order_items -->
+      <path d="M440,150 H480 V290 H520"/>
+      <line x1="448" y1="143" x2="448" y2="157"/><line x1="453" y1="143" x2="453" y2="157"/>
+      <line x1="508" y1="290" x2="520" y2="282"/><line x1="508" y1="290" x2="520" y2="298"/>
+      <line x1="503" y1="283" x2="503" y2="297"/>
+      <!-- products 1 — N order_items -->
+      <line x1="605" y1="144" x2="605" y2="230"/>
+      <line x1="598" y1="152" x2="612" y2="152"/><line x1="598" y1="157" x2="612" y2="157"/>
+      <line x1="605" y1="218" x2="597" y2="230"/><line x1="605" y1="218" x2="613" y2="230"/>
+      <circle cx="605" cy="212" r="3.5" fill="#fff"/>
+    </g>
+    <g class="tiny">
+      <text x="102" y="176">has</text><text x="102" y="188">ON DELETE CASCADE</text>
+      <text x="198" y="42">places</text><text x="198" y="70">no action</text>
+      <text x="374" y="246">contains</text><text x="374" y="258">ON DELETE CASCADE</text>
+      <text x="612" y="186">appears in</text><text x="612" y="198">RESTRICT (default)</text>
+    </g>
+    <text x="10" y="352" class="tiny">Crow's foot notation: ‖ exactly one · ○&lt; zero or many · |&lt; one or many</text>
+  </svg>
+  <figcaption><b>Figure B1.</b>Entity–relationship diagram, drawn from <code>schema.ts</code>. Green headers mark the sales ledger. A user may have no orders and no sessions (○&lt;). An order always has at least one line, because checkout rejects an empty cart (<code>items.min(1)</code>), so that end is drawn |&lt;. The rule is enforced by the application, not by the schema.</figcaption>
+  </figure>
+
+  <h3>B.2.1 Data dictionary</h3>
+  <table>
+    <thead><tr><th style="width:21%">Column</th><th style="width:15%">Type</th><th style="width:22%">Constraint</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td colspan="4" style="font:600 8.5pt var(--sans);color:var(--accent);border-bottom-color:var(--ink)">users: one row per account</td></tr>
+      <tr><td><code>email</code></td><td>TEXT</td><td>NOT NULL UNIQUE</td><td>Login identifier, lower-cased and trimmed before insert and lookup</td></tr>
+      <tr><td><code>password_hash</code></td><td>TEXT</td><td>NOT NULL</td><td><code>salt:hash</code>, both hex: scrypt with a 16-byte salt and 64-byte key</td></tr>
+      <tr><td><code>is_admin</code></td><td>INTEGER</td><td>DEFAULT 0</td><td>1 for the shop owner. The only distinction between roles.</td></tr>
+      <tr><td colspan="4" style="font:600 8.5pt var(--sans);color:var(--accent);border-bottom-color:var(--ink)">sessions: one row per signed-in browser</td></tr>
+      <tr><td><code>token</code></td><td>TEXT</td><td>PRIMARY KEY</td><td>32 random bytes as hex. Also the cookie value.</td></tr>
+      <tr><td><code>expires_at</code></td><td>TEXT</td><td>NOT NULL, indexed</td><td>ISO-8601 timestamp, 30 days after sign-in</td></tr>
+      <tr><td colspan="4" style="font:600 8.5pt var(--sans);color:var(--accent);border-bottom-color:var(--ink)">products: the catalogue</td></tr>
+      <tr><td><code>price</code></td><td>INTEGER</td><td>NOT NULL</td><td>Whole naira, e.g. 42000 = ₦42,000</td></tr>
+      <tr><td><code>stock</code></td><td>INTEGER</td><td>DEFAULT 0</td><td>Units on the shelf. Reduced by <code>createOrder</code>, set by the admin form.</td></tr>
+      <tr><td><code>image_path</code></td><td>TEXT</td><td>nullable</td><td><code>/uploads/&lt;file&gt;</code> or NULL for "No image"</td></tr>
+      <tr><td colspan="4" style="font:600 8.5pt var(--sans);color:var(--accent);border-bottom-color:var(--ink)">orders: one row per checkout</td></tr>
+      <tr><td><code>status</code></td><td>TEXT</td><td>DEFAULT 'pending'</td><td>pending · confirmed · delivered · cancelled (checked in the app, not by a CHECK constraint)</td></tr>
+      <tr><td><code>fulfilment</code></td><td>TEXT</td><td>NOT NULL</td><td>delivery · pickup</td></tr>
+      <tr><td><code>address</code></td><td>TEXT</td><td>nullable</td><td>Required by the app for delivery, stored NULL for pickup</td></tr>
+      <tr><td><code>subtotal</code>, <code>delivery_fee</code>, <code>total</code></td><td>INTEGER</td><td>NOT NULL</td><td>Amounts in naira, fixed at the moment of sale</td></tr>
+      <tr><td colspan="4" style="font:600 8.5pt var(--sans);color:var(--accent);border-bottom-color:var(--ink)">order_items: one row per product per order</td></tr>
+      <tr><td><code>name</code>, <code>price</code></td><td>TEXT, INTEGER</td><td>NOT NULL</td><td>Copied from <code>products</code> at purchase</td></tr>
+      <tr><td><code>qty</code></td><td>INTEGER</td><td>NOT NULL</td><td>1–50, after merging duplicates</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="chapter" id="b3">
+  <h2><span class="num">B.3</span>Normalization</h2>
+  <p>Checked one normal form at a time, using the functional dependencies the application relies on:</p>
+  <h4>First normal form</h4>
+  <p>Every column holds a single value: no comma lists, arrays or JSON blobs. A cart with several products becomes several <code>order_items</code> rows, not a list in one column. <code>address</code> is one free-text field. That is atomic for this shop's purposes, since nothing queries by street or city.</p>
+  <h4>Second normal form</h4>
+  <p>Every table has a single-column primary key, so no non-key column can depend on only part of a key. 2NF follows from 1NF. A design keyed on <code>(order_id, product_id)</code> would have had to be checked here. The surrogate <code>id</code> avoids the question, and duplicate products within an order are merged in code before the insert.</p>
+  <h4>Third normal form, and three deliberate exceptions</h4>
+  <p><code>users</code>, <code>sessions</code> and <code>products</code> have no transitive dependencies. In the sales ledger, three columns could in principle be derived from others. Each is stored on purpose, because the ledger has to record <em>what was true at the time of sale</em>:</p>
+  <table>
+    <thead><tr><th style="width:26%">Column</th><th style="width:30%">Could be derived from</th><th>Why it is stored anyway</th></tr></thead>
+    <tbody>
+      <tr><td><code>order_items.name</code>, <code>order_items.price</code></td><td><code>products.name</code>, <code>products.price</code> via <code>product_id</code></td><td>The schema comment says it directly: so that "history stays correct if the product is later renamed or repriced." Products can be edited freely in the admin form. Without the snapshot, repricing the 65W charger would silently change the value of every past order containing it.</td></tr>
+      <tr><td><code>orders.subtotal</code></td><td>Σ <code>order_items.price × qty</code></td><td>A fixed record of the amount the customer was asked to transfer. A reconciliation query (Q10) confirms the stored and recomputed values agree for all three orders.</td></tr>
+      <tr><td><code>orders.delivery_fee</code>, <code>orders.total</code></td><td><code>fulfilment</code> and the <code>DELIVERY_FEE</code> constant</td><td>The fee is a code constant (₦2,000). If it changes, existing orders must keep the fee they were charged.</td></tr>
+    </tbody>
+  </table>
+  <p>Strictly, this means the ledger tables are in 2NF, with controlled redundancy that turns them into an immutable historical record. That is the standard treatment of invoice and order lines. The redundancy is written once, inside the <code>createOrder</code> transaction, and never updated afterwards, so it cannot fall out of sync through an update anomaly.</p>
+  <h4>Integrity enforced, and where</h4>
+  <ul>
+    <li><strong>By the schema:</strong> NOT NULL, the unique email, foreign keys (with <code>foreign_keys = ON</code>), CASCADE from users to sessions and from orders to order_items, and RESTRICT from products to order_items.</li>
+    <li><strong>By the application only:</strong> the four <code>status</code> values, the two <code>fulfilment</code> values, non-negative price and stock, quantity 1–50, and an address being required for delivery. Adding <code>CHECK</code> constraints for these would move them into the database (see Limitations).</li>
+  </ul>
+</section>
+
+<section class="chapter" id="b4">
+  <h2><span class="num">B.4</span>Queries written</h2>
+  <p>The application has no ORM. Its queries are hand-written SQL with <code>?</code> placeholders, run through three helpers in <code>lib/db/client.ts</code>: <code>one()</code> returns the first row, <code>all()</code> every row, and <code>run()</code> executes a write and returns <code>changes</code> and <code>lastInsertRowid</code>. Each entry below pairs the function the app calls with the SQL that actually reaches SQLite. Values are bound as parameters, never concatenated into the string, so none of these queries can be injected.</p>
+
+  <table>
+    <thead><tr><th style="width:5%">#</th><th style="width:30%">Code call (file)</th><th>SQL executed</th></tr></thead>
+    <tbody>
+      <tr><td>Q1</td><td><code>listProducts()</code><br><span class="muted">products-data.ts:6</span><br>Shop, home, admin, product page</td><td><code>SELECT id, name, description, price, stock, image_path FROM products ORDER BY id DESC</code></td></tr>
+      <tr><td>Q2</td><td><code>createProduct(input)</code><br><span class="muted">products-data.ts:19</span></td><td><code>INSERT INTO products (name, description, price, stock, image_path) VALUES (?, ?, ?, ?, ?)</code></td></tr>
+      <tr><td>Q3</td><td><code>updateProduct(id, input)</code><br><span class="muted">products-data.ts:37</span></td><td><code>UPDATE products SET name = ?, description = ?, price = ?, stock = ?, image_path = ? WHERE id = ?</code></td></tr>
+      <tr><td>Q4</td><td><code>deleteProduct(id)</code><br><span class="muted">products-data.ts:58</span></td><td><code>DELETE FROM products WHERE id = ?</code> <span class="muted">(fails with a FOREIGN KEY error if the product appears in any <code>order_items</code> row)</span></td></tr>
+      <tr><td>Q5</td><td><code>createOrder(...)</code>, inside one transaction<br><span class="muted">orders-data.ts:23-114</span></td><td><code>BEGIN;</code><br><code>SELECT id, name, price, stock FROM products WHERE id = ?;</code> <span class="muted">(per product)</span><br><code>INSERT INTO orders (user_id, status, fulfilment, address, phone, subtotal, delivery_fee, total) VALUES (?, 'pending', ?, ?, ?, ?, ?, ?);</code><br><code>INSERT INTO order_items (order_id, product_id, name, price, qty) VALUES (?, ?, ?, ?, ?);</code><br><code>UPDATE products SET stock = stock - ? WHERE id = ? AND stock &gt;= ?;</code><br><code>COMMIT;</code> <span class="muted">or</span> <code>ROLLBACK;</code></td></tr>
+      <tr><td>Q6</td><td><code>ordersForUser(userId)</code><br><span class="muted">orders-data.ts:117</span></td><td><code>SELECT * FROM orders WHERE user_id = ? ORDER BY id DESC</code> <span class="muted">(served by <code>idx_orders_user</code>)</span></td></tr>
+      <tr><td>Q7</td><td><code>getOrder(id)</code> + <code>itemsForOrder(id)</code><br><span class="muted">orders-data.ts:121-127</span></td><td><code>SELECT * FROM orders WHERE id = ?</code><br><code>SELECT * FROM order_items WHERE order_id = ? ORDER BY id</code><br><span class="muted">The caller then checks <code>order.user_id === user.id</code>.</span></td></tr>
+      <tr><td>Q8</td><td><code>allOrders()</code> / <code>setOrderStatus()</code><br><span class="muted">orders-data.ts:129-135</span></td><td><code>SELECT * FROM orders ORDER BY id DESC</code><br><code>UPDATE orders SET status = ? WHERE id = ?</code></td></tr>
+      <tr><td>Q9</td><td><code>userForToken(token)</code><br><span class="muted">auth-data.ts:81</span><br>Every authenticated request</td><td><code>SELECT u.id, u.email, u.name, u.is_admin, s.expires_at FROM sessions s JOIN users u ON u.id = s.user_id WHERE s.token = ?</code><br><span class="muted">About every 100th call:</span> <code>DELETE FROM sessions WHERE expires_at &lt; ?</code></td></tr>
+      <tr><td>Q9a</td><td><code>loginFn</code>, <code>registerFn</code>, <code>startSession</code>, <code>destroySession</code><br><span class="muted">auth-api.ts, auth-data.ts</span></td><td><code>SELECT id, password_hash FROM users WHERE email = ?</code><br><code>SELECT COUNT(*) AS n FROM users</code> <span class="muted">(first user becomes admin)</span><br><code>INSERT INTO users (email, name, password_hash, is_admin) VALUES (?, ?, ?, ?)</code><br><code>INSERT INTO sessions (token, user_id, expires_at) VALUES (?, ?, ?)</code><br><code>DELETE FROM sessions WHERE token = ?</code></td></tr>
+      <tr><td>Q9b</td><td><code>scripts/set-password.ts</code></td><td><code>UPDATE users SET password_hash = ? WHERE id = ?</code><br><code>DELETE FROM sessions WHERE user_id = ?</code></td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <span class="label">Code observation</span>
+    <p><code>getProduct(id)</code> in <code>products-data.ts:12</code> (a <code>WHERE id = ?</code> lookup) is defined but never called. The product page's server function, <code>fetchProductFn</code>, loads the whole catalogue with Q1 and filters it in JavaScript (<code>listProducts().find(...)</code>, <code>store-actions.ts:44</code>). That is harmless with six products, but switching to <code>getProduct</code> would be the obvious fix as the catalogue grows.</p>
+  </div>
+
+  <h3>B.4.1 Reporting queries over the same schema</h3>
+  <p>The app has no reports page. The owner reads the admin list. The schema already supports the questions a shop owner asks, though. The queries below are <strong>not in the codebase</strong>. They were written for this documentation and run read-only against <code>data/store.db</code>, and the results shown are the real output.</p>
+  <p class="src">Q10 · reconcile stored subtotal against its lines</p>
+<pre><code class="language-sql">SELECT o.id, o.subtotal, SUM(oi.price * oi.qty) AS recomputed
+  FROM orders o JOIN order_items oi ON oi.order_id = o.id
+ GROUP BY o.id;
+-- 1 | 54000 | 54000     2 | 12500 | 12500     3 | 60500 | 60500</code></pre>
+  <p class="src">Q11 · value of orders by status (what is owed vs. received)</p>
+<pre><code class="language-sql">SELECT status, COUNT(*) AS orders, SUM(total) AS value
+  FROM orders GROUP BY status ORDER BY status;
+-- confirmed | 1 | 56000     delivered | 1 | 60500     pending | 1 | 12500</code></pre>
+  <p class="src">Q12 · units sold and revenue per product, with stock on hand</p>
+<pre><code class="language-sql">SELECT p.name,
+       COALESCE(SUM(oi.qty), 0)            AS units_sold,
+       COALESCE(SUM(oi.qty * oi.price), 0) AS revenue,
+       p.stock                             AS on_hand
+  FROM products p LEFT JOIN order_items oi ON oi.product_id = p.id
+ GROUP BY p.id ORDER BY revenue DESC;</code></pre>
+  <table>
+    <thead><tr><th>Product</th><th class="num">Units sold</th><th class="num">Revenue (₦)</th><th class="num">On hand</th></tr></thead>
+    <tbody>
+      <tr><td>65W GaN dual port</td><td class="num">1</td><td class="num">42,000</td><td class="num">5</td></tr>
+      <tr><td>Power bank 20000mAh</td><td class="num">1</td><td class="num">38,000</td><td class="num">8</td></tr>
+      <tr><td>Braided lightning cable 1m</td><td class="num">3</td><td class="num">22,500</td><td class="num">27</td></tr>
+      <tr><td>Wireless charging pad</td><td class="num">1</td><td class="num">12,500</td><td class="num">16</td></tr>
+      <tr><td>USB-C to USB-C cable 2m</td><td class="num">2</td><td class="num">12,000</td><td class="num">20</td></tr>
+      <tr><td>Anker 20W USB-C charger</td><td class="num">0</td><td class="num">0</td><td class="num">14</td></tr>
+    </tbody>
+  </table>
+  <p>Q12 counts every order, including <em>pending</em> ones whose transfer has not arrived. Adding <code>JOIN orders o ON o.id = oi.order_id WHERE o.status IN ('confirmed','delivered')</code> limits it to paid sales.</p>
+</section>
+
+<section class="chapter" id="b5">
+  <h2><span class="num">B.5</span>Forms and reports</h2>
+  <p>In database terms, a <em>form</em> is a screen that captures or changes records, and a <em>report</em> is a screen that presents records read back from the database. Each captured screen maps to one of those roles:</p>
+  <table>
+    <thead><tr><th style="width:24%">Screen (figure)</th><th style="width:10%">Role</th><th style="width:28%">Tables touched</th><th>Records captured or presented</th></tr></thead>
+    <tbody>
+      <tr><td>Create account (A9)</td><td><strong>Form</strong></td><td>INSERT users, sessions</td><td>Name, email, password → hashed row and a new session</td></tr>
+      <tr><td>Sign in (A8)</td><td><strong>Form</strong></td><td>SELECT users · INSERT sessions</td><td>Credentials → session token in cookie</td></tr>
+      <tr><td>Product detail (A7)</td><td>Form <span class="muted">(client)</span></td><td>SELECT products</td><td>Quantity into the browser cart. Not stored in the database until checkout.</td></tr>
+      <tr><td>Checkout (A11)</td><td><strong>Form</strong></td><td>INSERT orders, order_items · UPDATE products</td><td>Fulfilment, address, phone and lines → one order, its lines and the stock reduction</td></tr>
+      <tr><td>Add / edit product (A14, A15)</td><td><strong>Form</strong></td><td>INSERT / UPDATE / DELETE products</td><td>Catalogue maintenance and stock counts</td></tr>
+      <tr><td>Admin order status menu (A16)</td><td><strong>Form</strong></td><td>UPDATE orders</td><td>Records payment received (confirmed) and hand-over (delivered)</td></tr>
+      <tr><td>Shop and home (A5, A6)</td><td><strong>Report</strong></td><td>SELECT products</td><td>Public price list with live stock</td></tr>
+      <tr><td>Order history (A13)</td><td><strong>Report</strong></td><td>SELECT orders WHERE user_id</td><td>A customer's statement of orders, totals and status</td></tr>
+      <tr><td>Order detail (A12, A17)</td><td><strong>Report</strong></td><td>SELECT orders, order_items</td><td>An invoice-like breakdown using snapshot prices</td></tr>
+      <tr><td>Admin dashboard (A16)</td><td><strong>Report</strong> + form</td><td>SELECT products, orders</td><td>Stock sheet and order book for the owner: "6 products, 3 orders"</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="chapter flow" id="b6">
+  <h2><span class="num">B.6</span>Automating the shop's record-keeping</h2>
+  <p>Without this system, Adetunji Electronics would keep three paper records: a <strong>price list</strong>, a <strong>stock book</strong> and an <strong>order book</strong> (who ordered what, where it goes, whether they have paid). The database replaces each one and links them, so one action updates all the records it affects. Following one real order from the sample data shows how.</p>
+
+  <h3>One order, end to end</h3>
+  <table>
+    <thead><tr><th style="width:22%">Step</th><th style="width:38%">What happened (real data)</th><th>Record written automatically</th></tr></thead>
+    <tbody>
+      <tr><td>Customer orders</td><td>Chidinma Okafor orders 1 × 65W GaN dual port (₦42,000) and 2 × USB-C to USB-C cable 2m (₦6,000 each) for delivery to 14 Admiralty Way, Lekki Phase 1, Lagos, phone 0803 412 7781.</td><td><code>orders</code> #1: subtotal 54000, delivery_fee 2000, total 56000, status pending. Two <code>order_items</code> rows with the names and prices at that moment.</td></tr>
+      <tr><td>Stock book updated</td><td>No one writes anything down.</td><td><code>products.stock</code>: 65W GaN 6 → 5, USB-C cable 22 → 20, in the same transaction as the order.</td></tr>
+      <tr><td>Owner calls, customer transfers ₦56,000</td><td>The owner opens Admin and changes #1 to <em>confirmed</em>.</td><td><code>orders.status = 'confirmed'</code>. The customer's page switches to a green "Confirmed" badge and the "expect a call" panel disappears.</td></tr>
+      <tr><td>Hand-over</td><td>Tunde Bakare collects his order (#3, ₦60,500: a power bank and 3 lightning cables). The owner marks it <em>delivered</em>.</td><td><code>orders.status = 'delivered'</code>. Order #2 (₦12,500, collection) stays <em>pending</em>: still unpaid.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>What the shop gains</h3>
+  <ul>
+    <li><strong>No double-selling.</strong> The stock check and decrement are atomic, so the fifth-from-last 65W charger cannot be promised to two people.</li>
+    <li><strong>No disputed prices.</strong> Every order line carries the price that was charged, whatever happens to the catalogue afterwards.</li>
+    <li><strong>An accounts-receivable view for free.</strong> Pending orders are exactly the transfers still to collect. In the sample data that is ₦12,500 across one order (Q11).</li>
+    <li><strong>A customer contact record.</strong> Each order keeps the phone number used for the confirmation call and, for delivery, the address. The customer can see the same record themselves.</li>
+    <li><strong>A single, copyable archive.</strong> The whole business record is <code>data/store.db</code>.</li>
+  </ul>
+</section>
+
+<section class="chapter" id="limits">
+  <h2>Known limitations and recommendations</h2>
+  <p>Each item below was found by reading the code or running it. They are listed roughly in the order the shop would feel them.</p>
+  <table>
+    <thead><tr><th style="width:30%">Limitation</th><th style="width:34%">Evidence</th><th>Suggested change</th></tr></thead>
+    <tbody>
+      <tr><td>Cancelling an order does not return its stock</td><td><code>setOrderStatus</code> only runs <code>UPDATE orders SET status = ?</code></td><td>When moving to <code>cancelled</code>, add the line quantities back to <code>products.stock</code> in one transaction</td></tr>
+      <tr><td>Any status can follow any status</td><td><code>updateOrderStatusFn</code> checks membership of <code>STATUSES</code> only</td><td>Allow only pending → confirmed → delivered, plus → cancelled from pending or confirmed</td></tr>
+      <tr><td>No automated tests or CI</td><td>§A.5</td><td>Node's built-in test runner on <code>createOrder</code> and the auth functions with a temporary <code>DATA_DIR</code>. Run <code>npm run verify</code> in CI.</td></tr>
+      <tr><td>No rate limit on sign-in</td><td><code>loginFn</code> has no attempt counter</td><td>Throttle attempts per email and per IP address</td></tr>
+      <tr><td>Domain rules only in application code</td><td>No CHECK constraints in the schema</td><td><code>CHECK (status IN (…))</code>, <code>CHECK (fulfilment IN ('delivery','pickup'))</code>, <code>CHECK (price &gt;= 0 AND stock &gt;= 0)</code>, <code>CHECK (qty BETWEEN 1 AND 50)</code></td></tr>
+      <tr><td>Product page loads the whole catalogue</td><td><code>fetchProductFn</code> uses <code>listProducts().find</code></td><td>Call the existing <code>getProduct(id)</code></td></tr>
+      <tr><td>The README is out of date on the cookie <code>secure</code> flag and on backup scope</td><td>§A.6.4</td><td>State that HTTPS is required in production, and include <code>public/uploads</code> and the WAL file in backups</td></tr>
+      <tr><td>Checkout select shows a raw value</td><td>Figure A11 shows "delivery"</td><td>Render the item label in <code>SelectValue</code></td></tr>
+    </tbody>
+  </table>
+</section>
+
+</main>
+
+<script>
+  document.querySelectorAll("pre code").forEach((el) => { if (window.hljs) hljs.highlightElement(el); });
+</script>
+</body>
+</html>
