@@ -61,7 +61,7 @@ function main() {
   }
   console.log(`Inserted ${PRODUCTS.length} products.`);
 
-  const adminEmail = process.env.ADMIN_EMAIL ?? "admin@adetunji.shop";
+  const adminEmail = process.env.ADMIN_EMAIL ?? "admin@bolfos.shop";
   const adminPassword = process.env.ADMIN_PASSWORD ?? "changeme123";
 
   if (!one("SELECT id FROM users WHERE email = ?", adminEmail)) {

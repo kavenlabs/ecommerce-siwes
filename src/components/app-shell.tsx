@@ -37,7 +37,7 @@ function Brand() {
       <span className="flex size-8 items-center justify-center rounded-md bg-primary text-sm text-primary-foreground">
         A
       </span>
-      <span>Adetunji Electronics</span>
+      <span>Bolfos Ventures</span>
     </Link>
   );
 }

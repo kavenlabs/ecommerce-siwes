@@ -1,7 +1,7 @@
 /*
  * Sets or changes a user's password.
  *
- *   npm run user:password -- admin@adetunji.shop 'a-new-strong-password'
+ *   npm run user:password -- admin@bolfos.shop 'a-new-strong-password'
  *
  * Use this instead of deleting the account, which would lose its order
  * history. The admin account is the one created by npm run db:seed.

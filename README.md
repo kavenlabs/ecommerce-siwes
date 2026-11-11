@@ -1,4 +1,4 @@
-# Adetunji Electronics
+# Bolfos Ventures
 
 A single-store ecommerce site for cables, chargers, and accessories.
 
@@ -26,12 +26,12 @@ npm run db:seed     # creates data/store.db, 6 sample products, one admin accoun
 npm run dev         # http://localhost:3000
 ```
 
-The seed creates one admin, `admin@adetunji.shop`, with the password
+The seed creates one admin, `admin@bolfos.shop`, with the password
 `changeme123`. **Change it before you go live**, or anyone who has read this
 file can sign in as the shop owner:
 
 ```bash
-npm run user:password -- admin@adetunji.shop 'a-long-unique-password'
+npm run user:password -- admin@bolfos.shop 'a-long-unique-password'
 ```
 
 That also signs out every existing session for the account, so a stolen cookie
